@@ -1,0 +1,1 @@
+export const PADDING =  0.93 * 440
