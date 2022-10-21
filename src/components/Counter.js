@@ -48,7 +48,7 @@ class Counter extends Component {
 
     //stop timer
     this.stopTimer = () => {
-      // if (this.start == 0) return;
+      if (this.start == 0) return;
       // this.start = 15;
       this.setState({
         s: "00",

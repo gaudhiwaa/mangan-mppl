@@ -10,13 +10,14 @@ function StyledButton({
   marginTop,
   onClick,
   color,
+  borderRadius
 }) {
   return (
     <Button
       variant="contained"
       onClick={onClick}
       sx={{
-        borderRadius: '8px',
+        borderRadius: borderRadius || '8px',
         backgroundColor: THEME.GREEN_PRIMARY,
         ...(style === "outlined" && {
           backgroundColor: "transparent",

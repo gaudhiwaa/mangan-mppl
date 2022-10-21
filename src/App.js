@@ -23,6 +23,8 @@ const Center = styled(Box)({
   display: "flex",
   justifyContent: "center",
   backgroundColor: THEME.WHITE_SECONDARY,
+  height: '100%',
+  overflow: "hidden"
 });
 
 function App() {

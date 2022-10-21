@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, createTheme, Typography } from "@mui/material";
 import React from "react";
 import { HOME } from "../constants/Typography";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
@@ -12,6 +12,18 @@ import Carousel from "../components/Carousel";
 import SectionTitle from "../components/SectionTitle";
 import SelectedMenu from "../components/SelectedMenu";
 import AyamPangsit from "../assets/product/AyamPangsit.png";
+import EconomicalPacket from "../components/EconomicalPacket";
+import './home.css'; 
+import Newest from "../components/Newest";
+import StyledTabs from "../components/StyledTabs";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: THEME.GREEN_PRIMARY,
+    },
+  },
+});
 
 const CustomizedButton = styled(Button)({
   textTransform: "none",
@@ -19,8 +31,7 @@ const CustomizedButton = styled(Button)({
     backgroundColor: "transparent",
   },
   marginLeft: "-20px",
-  // margin: '20px',
-  // backgroundColor: 'red'
+  
 });
 
 function Home() {
@@ -31,6 +42,7 @@ function Home() {
         flexDirection: "column",
         alignItems: "center",
         width: "100%",
+        overflow: "scroll"
       }}
     >
       <Box sx={{ width: PADDING, marginTop: "16px" }}>
@@ -122,42 +134,107 @@ function Home() {
               </Typography>
             </Box>
           </Box>
-          <Box sx={{ display: "flex", marginTop: '13px'}}>
-            <Box sx={{marginRight: '8px', }}>
-            <SelectedMenu
-              title={"Ayam Pangsit"}
-              discount={20}
-              price={"25000"}
-              rating="5.0"
-              sold="809"
-              image={AyamPangsit}
-            />
+          <Box sx={{ display: "flex", marginTop: "13px" }}>
+            <Box sx={{ marginRight: "8px" }}>
+              <SelectedMenu
+                title={"Ayam Pangsit"}
+                discount={20}
+                price={"25000"}
+                rating="5.0"
+                sold="809"
+                image={AyamPangsit}
+              />
             </Box>
-            <Box sx={{marginRight: '8px',}}>
-            <SelectedMenu
-              title={"Ayam Pangsit"}
-              discount={20}
-              price={"25000"}
-              rating="5.0"
-              sold="809"
-              image={AyamPangsit}
-            />
+            <Box sx={{ marginRight: "8px" }}>
+              <SelectedMenu
+                title={"Ayam Pangsit"}
+                discount={20}
+                price={"25000"}
+                rating="5.0"
+                sold="809"
+                image={AyamPangsit}
+              />
             </Box>
-            <Box sx={{marginRight: '8px', }}>
-            <SelectedMenu
-              title={"Ayam Pangsit"}
-              discount={20}
-              price={"25000"}
-              rating="5.0"
-              sold="809"
-              image={AyamPangsit}
-            />
+            <Box sx={{ marginRight: "8px" }}>
+              <SelectedMenu
+                title={"Ayam Pangsit"}
+                discount={20}
+                price={"25000"}
+                rating="5.0"
+                sold="809"
+                image={AyamPangsit}
+              />
             </Box>
           </Box>
         </Box>
         <SectionTitle title={HOME.PaketHemat} desc={HOME.WarungTerpercayaDi} />
+        <Box sx={{ display: "flex", marginTop: "13px", overflow: 'scroll', position: 'relative'}}>
+          <Box sx={{ marginRight: "8px" }}>
+            <EconomicalPacket
+              title={"Ayam Pangsit"}
+              rating="5.0"
+              sold="101"
+              image={AyamPangsit}
+            />
+          </Box>
+          <Box sx={{ marginRight: "8px" }}>
+            <EconomicalPacket
+              title={"Ayam Pangsit"}
+              rating="5.0"
+              sold="101"
+              image={AyamPangsit}
+            />
+          </Box>
+          <Box sx={{ marginRight: "8px" }}>
+            <EconomicalPacket
+              title={"Ayam Pangsit"}
+              rating="5.0"
+              sold="101"
+              image={AyamPangsit}
+            />
+          </Box>
+          <Box sx={{ marginRight: "8px" }}>
+            <EconomicalPacket
+              title={"Ayam Pangsit"}
+              rating="5.0"
+              sold="101"
+              image={AyamPangsit}
+            />
+          </Box>
+        </Box>
         <SectionTitle title={HOME.Terbaru} desc={HOME.ProdukPilihanPaling} />
+        <Box
+          sx={{ display: "flex", flexDirection: "column", marginTop: "13px" }}
+        >
+          <Box sx={{ }}>
+            <Newest
+              title={"Ayam Pangsit"}
+              discount={40}
+              image={AyamPangsit}
+              price={"25000"}
+            />
+          </Box>
+          <Box sx={{ marginTop: "32px" }}>
+            <Newest
+              title={"Ayam Pangsit"}
+              discount={40}
+              image={AyamPangsit}
+              price={"25000"}
+            />
+          </Box>
+          <Box sx={{ marginTop: "32px"  }}>
+            <Newest
+              title={"Ayam Pangsit"}
+              discount={40}
+              image={AyamPangsit}
+              price={"25000"}
+            />
+          </Box>
+        </Box>
         <SectionTitle title={HOME.Rekomendasi} />
+        <Box>
+          <StyledTabs/>
+        </Box>
       </Box>
     </Box>
   );

@@ -2,6 +2,7 @@ import { Box, Input, TextField, Typography } from "@mui/material";
 import React from "react";
 import { THEME } from "../constants/Theme";
 
+
 function StyledTextField({ text, icon, height, width, marginTop, type }) {
   return (
     <Box
