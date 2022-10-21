@@ -16,6 +16,7 @@ import EconomicalPacket from "../components/EconomicalPacket";
 import './home.css'; 
 import Newest from "../components/Newest";
 import StyledTabs from "../components/StyledTabs";
+import AppBarBot from "../components/AppBarBot";
 
 const theme = createTheme({
   palette: {
@@ -236,6 +237,7 @@ function Home() {
           <StyledTabs/>
         </Box>
       </Box>
+      <AppBarBot/>
     </Box>
   );
 }
