@@ -91,7 +91,7 @@ function SelectedMenu({
               </Box>
             </Box>
             <Box sx={{ marginTop: "8px" }}>
-              <StyledButton text={"Tambah"} style="outlined" height="26px" />
+              <StyledButton text={"Tambah"} style="outlined" height="26px" noShadow/>
             </Box>
           </Box>
         </>
@@ -165,7 +165,7 @@ function SelectedMenu({
             </Box>
           </Box>
           <Box sx={{ marginTop: "8px" }}>
-            <StyledButton text={"Tambah"} style="outlined" height="26px" />
+            <StyledButton text={"Tambah"} style="outlined" height="26px" noShadow/>
           </Box>
         </Box>
       )}

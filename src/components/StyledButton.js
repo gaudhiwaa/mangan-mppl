@@ -10,13 +10,15 @@ function StyledButton({
   marginTop,
   onClick,
   color,
-  borderRadius
+  borderRadius,
+  noShadow
 }) {
   return (
     <Button
       variant="contained"
       onClick={onClick}
       sx={{
+        boxShadow: noShadow ? 0 : "",
         borderRadius: borderRadius || '8px',
         backgroundColor: THEME.GREEN_PRIMARY,
         ...(style === "outlined" && {
@@ -49,7 +51,9 @@ function StyledButton({
           backgroundColor: THEME.GREY_PRIMARY,
         }),
           borderColor: style === "outlined" ? THEME.GREEN_PRIMARY : "none",
+          boxShadow: noShadow ? "rgba(0, 0, 0, 0.16) 0px 1px 4px;" + THEME.GREEN_PRIMARY : "",
         },
+        
       }}
     >
       {text}

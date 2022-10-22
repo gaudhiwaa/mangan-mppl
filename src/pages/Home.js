@@ -135,7 +135,17 @@ function Home() {
               </Typography>
             </Box>
           </Box>
-          <Box sx={{ display: "flex", marginTop: "13px" }}>
+          <Box sx={{ display: "flex", marginTop: "13px", overflow: 'scroll' }}>
+            <Box sx={{ marginRight: "8px" }}>
+              <SelectedMenu
+                title={"Ayam Pangsit"}
+                discount={20}
+                price={"25000"}
+                rating="5.0"
+                sold="809"
+                image={AyamPangsit}
+              />
+            </Box>
             <Box sx={{ marginRight: "8px" }}>
               <SelectedMenu
                 title={"Ayam Pangsit"}

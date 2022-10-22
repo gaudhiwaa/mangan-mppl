@@ -60,7 +60,7 @@ function Newest({ title, discount, image, price }) {
       </Box>
       </Box>
       <Box sx={{ display: "flex", alignItems: "flex-end", height: '75px'}}>
-        <StyledButton style="outlined" text={"Tambah"} height="26px" fontSize="12px" borderRadius="4px"/>
+        <StyledButton style="outlined" text={"Tambah"} height="26px" fontSize="12px" borderRadius="4px" noShadow/>
       </Box>
     </Box>
   );

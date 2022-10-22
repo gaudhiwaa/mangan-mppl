@@ -100,11 +100,11 @@ export default function StyledTabs() {
           <TabPanel value={value} index={0} dir={theme.direction}>
             <Grid
               container
-              rowSpacing={3}
+              rowSpacing={2}
               columnSpacing={{ xs: 0, sm: 0, md: 0 }}
-              sx={{width: '443px', ml: '-20px'}}
+              sx={{ width: "443px", ml: "-20px" }}
             >
-              <Grid item xs={6} sx={{ }}>
+              <Grid item xs={6} sx={{}}>
                 <SelectedMenu
                   tabs
                   title={"Ayam Pangsit"}
@@ -116,7 +116,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6}>
-              <SelectedMenu
+                <SelectedMenu
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -126,7 +126,7 @@ export default function StyledTabs() {
                   image={AyamPangsit}
                 />
               </Grid>
-              <Grid item xs={6} sx={{ }}>
+              <Grid item xs={6} sx={{}}>
                 <SelectedMenu
                   tabs
                   title={"Ayam Pangsit"}
@@ -138,7 +138,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6}>
-              <SelectedMenu
+                <SelectedMenu
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -151,10 +151,216 @@ export default function StyledTabs() {
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
-            Item Two
+            <Grid
+              container
+              rowSpacing={2}
+              columnSpacing={{ xs: 0, sm: 0, md: 0 }}
+              sx={{ width: "443px", ml: "-20px" }}
+            >
+              <Grid item xs={6} sx={{}}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+              <Grid item xs={6} sx={{}}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+            </Grid>
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            Item Three
+            <Grid
+              container
+              rowSpacing={2}
+              columnSpacing={{ xs: 0, sm: 0, md: 0 }}
+              sx={{ width: "443px", ml: "-20px" }}
+            >
+              <Grid item xs={6} sx={{}}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+              <Grid item xs={6} sx={{}}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+            </Grid>
+          </TabPanel>
+          <TabPanel value={value} index={3} dir={theme.direction}>
+            <Grid
+              container
+              rowSpacing={2}
+              columnSpacing={{ xs: 0, sm: 0, md: 0 }}
+              sx={{ width: "443px", ml: "-20px" }}
+            >
+              <Grid item xs={6} sx={{}}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+              <Grid item xs={6} sx={{}}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+            </Grid>
+          </TabPanel>
+          <TabPanel value={value} index={4} dir={theme.direction}>
+            <Grid
+              container
+              rowSpacing={2}
+              columnSpacing={{ xs: 0, sm: 0, md: 0 }}
+              sx={{ width: "443px", ml: "-20px" }}
+            >
+              <Grid item xs={6} sx={{}}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+              <Grid item xs={6} sx={{}}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <SelectedMenu
+                  tabs
+                  title={"Ayam Pangsit"}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={AyamPangsit}
+                />
+              </Grid>
+            </Grid>
           </TabPanel>
         </SwipeableViews>
       </Box>
