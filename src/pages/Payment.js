@@ -102,7 +102,7 @@ function Payment() {
           backgroundColor: "#FAFAFA",
           marginBottom: "21px",
         }}
-      ></Box>
+      />
       <Box sx={{ width: "90%" }}>
         <Box
           sx={{

@@ -7,7 +7,7 @@ import StyledTextField from "../components/StyledTextField";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import StyledButton from "../components/StyledButton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function LogIn() {

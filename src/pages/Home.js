@@ -1,4 +1,4 @@
-import { Box, Button, createTheme, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import { HOME } from "../constants/Typography";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
@@ -8,7 +8,6 @@ import { PADDING } from "../constants/Padding";
 import styled from "@emotion/styled";
 import StyledTextField from "../components/StyledTextField";
 import SearchIcon from "@mui/icons-material/Search";
-import Carousel from "../components/Carousel";
 import SectionTitle from "../components/SectionTitle";
 import SelectedMenu from "../components/SelectedMenu";
 import AyamPangsit from "../assets/product/AyamPangsit.png";
@@ -17,14 +16,7 @@ import './home.css';
 import Newest from "../components/Newest";
 import StyledTabs from "../components/StyledTabs";
 import AppBarBot from "../components/AppBarBot";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: THEME.GREEN_PRIMARY,
-    },
-  },
-});
+import { useNavigate } from "react-router-dom";
 
 const CustomizedButton = styled(Button)({
   textTransform: "none",
@@ -36,6 +28,7 @@ const CustomizedButton = styled(Button)({
 });
 
 function Home() {
+  const navigate = useNavigate()
   return (
     <Box
       sx={{
@@ -78,6 +71,7 @@ function Home() {
                       color: THEME.GREEN_PRIMARY,
                       marginTop: "4px",
                     }}
+                    onClick={() => navigate("/location")}
                   >
                     {HOME.Ubah}
                   </Typography>

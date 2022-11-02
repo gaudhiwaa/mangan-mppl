@@ -10,6 +10,7 @@ import RegisterPhase2 from "./pages/register/RegisterPhase2";
 import Home from "./pages/Home";
 import Payment from "./pages/Payment";
 import PaymentGateway from "./pages/PaymentGateway";
+import Location from "./pages/Location";
 
 const CustomizedSize = styled(Box)({
   backgroundColor: THEME.WHITE,
@@ -40,6 +41,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/paymentgateway" element={<PaymentGateway />} />
+            <Route path="/location" element={<Location />} />
           </Routes>
         </CustomizedSize>
       </Center>
