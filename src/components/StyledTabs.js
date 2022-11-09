@@ -5,10 +5,12 @@ import Box from "@mui/material/Box";
 import styled from "@emotion/styled";
 import { THEME } from "../constants/Theme";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import SwipeableViews from "react-swipeable-views";
-import { Typography } from "@mui/material";
+import SwipeableViews from "react-swipeable-views";
+import { Grid, Typography } from "@mui/material";
 import PropTypes from "prop-types";
-// import { useTheme } from "@emotion/react";
+import { useTheme } from "@emotion/react";
+import SelectedMenu from "./SelectedMenu";
+import AyamPangsit from "../assets/product/AyamPangsit.png";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,12 +38,12 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-// function a11yProps(index) {
-//   return {
-//     id: `full-width-tab-${index}`,
-//     "aria-controls": `full-width-tabpanel-${index}`,
-//   };
-// }
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
+  };
+}
 
 const themeColor = createTheme({
   palette: {
@@ -65,9 +67,11 @@ export default function StyledTabs() {
     setValue(newValue);
   };
 
-  // const handleChangeIndex = (index) => {
-  //   setValue(index);
-  // };
+  const theme = useTheme();
+
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
 
   return (
     <ThemeProvider theme={themeColor}>
@@ -88,7 +92,7 @@ export default function StyledTabs() {
           <CustomTab label="Desert" />
           <CustomTab label="Minuman" />
         </Tabs>
-        {/* <SwipeableViews
+        <SwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           index={value}
           onChangeIndex={handleChangeIndex}
@@ -358,7 +362,7 @@ export default function StyledTabs() {
               </Grid>
             </Grid>
           </TabPanel>
-        </SwipeableViews> */}
+        </SwipeableViews>
       </Box>
     </ThemeProvider>
   );

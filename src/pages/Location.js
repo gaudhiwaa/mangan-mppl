@@ -1,13 +1,17 @@
-import { Box, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import React from "react";
 import Map from "../assets/location/Map";
 import AppBarTop from "../components/AppBarTop";
-import SearchBar from "../components/SearchBar";
 import { PADDING } from "../constants/Padding";
 import { THEME } from "../constants/Theme";
 import LocationIcon from "../assets/location/LocationIcon";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import PinPoint from "../assets/location/PinPointIcon";
 
 function Location() {
+  const [searchLoc, setSearchLoc] = React.useState("");
+  const [chooseMap, setChooseMap] = React.useState(false);
+
   return (
     <Box
       sx={{
@@ -20,8 +24,40 @@ function Location() {
     >
       <AppBarTop text={"Ubah Lokasi"} />
       <Box sx={{ width: PADDING, display: "flex", flexDirection: "column" }}>
-        <SearchBar />
+        <Box sx={{ width: "100%" }}>
+          <TextField
+            variant="standard"
+            type="text"
+            onChange={(e) => setSearchLoc(e.target.value)}
+            value={searchLoc}
+            placeholder="Cari Lokasi"
+            InputProps={{
+              startAdornment: (
+                <LocationOnIcon
+                  sx={{
+                    marginRight: "12px",
+                    color: THEME.GREY_PRIMARY,
+                    fontSize: "16px",
+                  }}
+                />
+              ), // <== adjusted this
+              disableUnderline: true, // <== added this
+            }}
+            sx={{
+              input: { fontWeight: 500, fontSize: "12px", marginTop: "2px" },
+              backgroundColor: "#F5F5F5",
+              height: "42px",
+              display: "flex",
+              justifyContent: "center",
+              paddingLeft: "18px",
+              paddingRight: "16px",
+              borderRadius: "8px",
+            }}
+          ></TextField>
+        </Box>
       </Box>
+      {chooseMap? "" : 
+      <>
       <Box
         sx={{
           marginTop: "3px",
@@ -37,15 +73,21 @@ function Location() {
           alignItems: "center",
           justifyContent: "flex-start",
           width: PADDING,
-          mt: '20px',
-          ml: '23px'
+          mt: "20px",
+          ml: "23px",
         }}
       >
-        <Map/>
-        <Typography sx={{ marginLeft: "9px", color: THEME.GREEN_PRIMARY, fontSize: '14px', }}>
+        <Map />
+        <Typography
+          onClick={(e) => setChooseMap(true)}
+          sx={{
+            marginLeft: "9px",
+            color: THEME.GREEN_PRIMARY,
+            fontSize: "14px",
+          }}
+        >
           Pilih lewat peta
         </Typography>
-        
       </Box>
       <Box
         sx={{
@@ -53,24 +95,117 @@ function Location() {
           width: PADDING,
           height: "1px",
           backgroundColor: "#F5F5F5",
-          marginBottom: "18px",
         }}
       />
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          width: PADDING,
-          ml: '23px'
-        }}
-      >
-        <LocationIcon/>
-        <Typography sx={{ marginLeft: "9px", color: THEME.GREY_PRIMARY, fontSize: '14px', }}>
-          Gunakan Lokasi Saat Ini
-        </Typography>
-        
-      </Box>
+      {searchLoc ? (
+        <>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
+            width: PADDING,
+            ml: "23px",
+            marginTop: "18px",
+          }}
+        >
+          <PinPoint />
+          <Box sx={{ marginLeft: "9px", color: THEME.GREY_PRIMARY, mt: '-2px'}}>
+            <Typography
+              sx={{
+                color: THEME.GREY_PRIMARY,
+                fontSize: "12px",
+                fontWeight: 600,
+              }}
+            >
+              Arandra Residence
+            </Typography>
+            <Typography sx={{ fontSize: "12px", mt: "10px" }}>
+              Kec. Cemp. Putih, Kota Jakarta Pusat, Daerah Khusus Ibukota
+              Jakarta
+            </Typography>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
+            width: PADDING,
+            ml: "23px",
+            marginTop: "18px",
+          }}
+        >
+          <PinPoint />
+          <Box sx={{ marginLeft: "9px", color: THEME.GREY_PRIMARY, mt: '-2px'}}>
+            <Typography
+              sx={{
+                color: THEME.GREY_PRIMARY,
+                fontSize: "12px",
+                fontWeight: 600,
+              }}
+            >
+              Arandra Residence
+            </Typography>
+            <Typography sx={{ fontSize: "12px", mt: "10px" }}>
+              Kec. Cemp. Putih, Kota Jakarta Pusat, Daerah Khusus Ibukota
+              Jakarta
+            </Typography>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
+            width: PADDING,
+            ml: "23px",
+            marginTop: "18px",
+          }}
+        >
+          <PinPoint />
+          <Box sx={{ marginLeft: "9px", color: THEME.GREY_PRIMARY, mt: '-2px'}}>
+            <Typography
+              sx={{
+                color: THEME.GREY_PRIMARY,
+                fontSize: "12px",
+                fontWeight: 600,
+              }}
+            >
+              Arandra Residence
+            </Typography>
+            <Typography sx={{ fontSize: "12px", mt: "10px" }}>
+              Kec. Cemp. Putih, Kota Jakarta Pusat, Daerah Khusus Ibukota
+              Jakarta
+            </Typography>
+          </Box>
+        </Box>
+        </>
+      ) : (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            width: PADDING,
+            ml: "23px",
+            mb: "13px",
+            marginTop: "18px",
+          }}
+        >
+          <LocationIcon />
+          <Typography
+            sx={{
+              marginLeft: "9px",
+              color: THEME.GREY_PRIMARY,
+              fontSize: "14px",
+              
+            }}
+          >
+            Gunakan Lokasi Saat Ini
+          </Typography>
+        </Box>
+      )}</>}
     </Box>
   );
 }
