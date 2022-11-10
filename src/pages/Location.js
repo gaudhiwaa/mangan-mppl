@@ -7,6 +7,7 @@ import { THEME } from "../constants/Theme";
 import LocationIcon from "../assets/location/LocationIcon";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PinPoint from "../assets/location/PinPointIcon";
+import SwipeableEdgeDrawer from "../components/SwipeableEdgeDrawer";
 
 function Location() {
   const [searchLoc, setSearchLoc] = React.useState("");
@@ -23,7 +24,7 @@ function Location() {
       }}
     >
       <AppBarTop text={"Ubah Lokasi"} />
-      <Box sx={{ width: PADDING, display: "flex", flexDirection: "column" }}>
+      <Box sx={{ width: PADDING, display: "flex", flexDirection: "column",  }}>
         <Box sx={{ width: "100%" }}>
           <TextField
             variant="standard"
@@ -40,8 +41,8 @@ function Location() {
                     fontSize: "16px",
                   }}
                 />
-              ), // <== adjusted this
-              disableUnderline: true, // <== added this
+              ),
+              disableUnderline: true, 
             }}
             sx={{
               input: { fontWeight: 500, fontSize: "12px", marginTop: "2px" },
@@ -56,7 +57,16 @@ function Location() {
           ></TextField>
         </Box>
       </Box>
-      {chooseMap? "" : 
+      {chooseMap? 
+      <>
+      <Box
+        sx={{backgroundColor: 'red',}}
+      >
+        <SwipeableEdgeDrawer/>
+      </Box>
+      </>
+      
+      : 
       <>
       <Box
         sx={{
@@ -75,6 +85,9 @@ function Location() {
           width: PADDING,
           mt: "20px",
           ml: "23px",
+          '&:hover': {
+            cursor: 'pointer'
+          },
         }}
       >
         <Map />
@@ -191,6 +204,9 @@ function Location() {
             ml: "23px",
             mb: "13px",
             marginTop: "18px",
+            '&:hover': {
+              cursor: 'pointer'
+            },
           }}
         >
           <LocationIcon />
