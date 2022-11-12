@@ -57,8 +57,12 @@ function SwipeableEdgeDrawer(props) {
         styles={{
           ".MuiDrawer-root > .MuiPaper-root": {
             height: `calc(50% - ${drawerBleeding}px)`,
-            width: "100%",
+            width: "445px",
             overflow: "visible",
+            marginLeft: "auto",
+          marginRight: "auto",
+          left: 0,
+          right: 0,
           },
         }}
       />
@@ -98,8 +102,13 @@ function SwipeableEdgeDrawer(props) {
               borderTopLeftRadius: 8,
               borderTopRightRadius: 8,
               visibility: "visible",
-              width: "100%",
+              width: "445px",
               height: "100%",
+              marginLeft: "auto",
+          marginRight: "auto",
+          left: 0,
+          right: 0,
+              
               // right: "auto",
               // left: "500px",
               // padding:"0 auto"
