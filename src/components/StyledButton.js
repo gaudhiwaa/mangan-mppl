@@ -9,7 +9,6 @@ function StyledButton({
   text,
   marginTop,
   onClick,
-  color,
   borderRadius,
   noShadow
 }) {

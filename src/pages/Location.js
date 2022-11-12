@@ -60,7 +60,8 @@ function Location() {
       {chooseMap? 
       <>
       <Box
-        sx={{backgroundColor: 'red',}}
+        sx={{
+          backgroundColor: 'red', display: 'flex', justifyContent: 'center'}}
       >
         <SwipeableEdgeDrawer/>
       </Box>
