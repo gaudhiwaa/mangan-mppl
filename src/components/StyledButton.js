@@ -10,7 +10,7 @@ function StyledButton({
   marginTop,
   onClick,
   borderRadius,
-  noShadow
+  noShadow,
 }) {
   return (
     <Button

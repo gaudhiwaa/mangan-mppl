@@ -11,6 +11,7 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { PADDING } from "../constants/Padding";
 import GreenLocationIcon from "../assets/location/GreenLocationIcon";
 import StyledButton from "./StyledButton";
+import StyledTextField from "./StyledTextField";
 
 const drawerBleeding = 200;
 
@@ -56,7 +57,7 @@ function SwipeableEdgeDrawer(props) {
       <Global
         styles={{
           ".MuiDrawer-root > .MuiPaper-root": {
-            height: `calc(50% - ${drawerBleeding}px)`,
+            height: `calc(58% - ${drawerBleeding}px)`,
             width: "445px",
             overflow: "visible",
             marginLeft: "auto",
@@ -105,13 +106,9 @@ function SwipeableEdgeDrawer(props) {
               width: "445px",
               height: "100%",
               marginLeft: "auto",
-          marginRight: "auto",
-          left: 0,
-          right: 0,
-              
-              // right: "auto",
-              // left: "500px",
-              // padding:"0 auto"
+              marginRight: "auto",
+              left: 0,
+              right: 0,
             }}
           >
             <Puller />
@@ -142,10 +139,25 @@ function SwipeableEdgeDrawer(props) {
                     Daerah Khusus Ibukota Jakarta 10510
                   </Typography>
                 </Box>
-                <StyledButton
+                {open? "" : <StyledButton
                   text={"Set Titik Lokasi"}
                   onClick={toggleDrawer(false)}
+                />}
+                {open?<>
+                <Typography sx={{fontSize: '12px', fontWeight: 600, marginBottom: '8px',}}>Detail Alamat</Typography>
+                <StyledTextField padding= "0px 14px 0 14px" text={"Contoh: Tower Chrysant,  Lantai 18"}/>
+                <Typography sx={{fontSize: '12px', fontWeight: 600, marginBottom: '8px', marginTop:"15px"}}>Nama Penerima</Typography>
+                <StyledTextField padding= "0px 14px 0 14px" text={"Masukkan nama penerima"}/>
+                <Typography sx={{fontSize: '12px', fontWeight: 600, marginBottom: '8px', marginTop:"15px"}}>No. Telp</Typography>
+                <StyledTextField padding= "0px 14px 0 14px" />
+                <StyledButton
+                  text={"Tambah Alamat"}
+                  marginTop="26px"
                 />
+                </>
+                
+                : ""}
+                
               </Box>
             </Box>
           </StyledBox>
