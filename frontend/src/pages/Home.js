@@ -17,7 +17,7 @@ import StyledTabs from "../components/StyledTabs";
 import AppBarBot from "../components/AppBarBot";
 import { useNavigate } from "react-router-dom";
 import VoucherIcon from "../assets/home/VoucherIcon";
-import PointIcon from "../assets/home/PoinIcon";
+import PointIcon from "../assets/home/PointIcon";
 
 function Home() {
   const navigate = useNavigate();
