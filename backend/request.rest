@@ -1,0 +1,17 @@
+GET http://localhost:8080/customers 
+
+###
+GET http://localhost:8080/customers/1
+
+
+###
+POST http://localhost:8080/customers 
+Content-Type: application/json
+
+{
+    "name" : "Gaudhiwaa Hendrasto",
+    "email": "gaudhiwaa@gmail.com",
+    "gender": "Male",
+    "password": "mpplceria",
+    "address": "Jl. Teknik Komputer IV, Keputih, Surabaya"
+}

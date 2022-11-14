@@ -7,14 +7,41 @@ import StyledTextField from "../components/StyledTextField";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import StyledButton from "../components/StyledButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { THEME } from '../constants/Theme';
+import axios from "axios";
 
 function LogIn() {
-  // const [email, setEmail] = useState("")
-  // const [password, setPassword] = useState("")
+  const [emailInput, setEmailInput] = useState("")
+  const [passwordInput, setPasswordInput] = useState("")
   const [buttonColor, setButtonColor] = useState("")
+  const [comments,setComments]=useState([])
+  const [flag, setFlag]= useState(false)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    auth()
+  },);
+
+  const auth = async () => {
+    const response = await axios.get("http://localhost:8080/customers");
+  
+    if (response.data[0].password === passwordInput && response.data[0].email === emailInput) {
+      setButtonColor(THEME.GREEN_PRIMARY);
+      setFlag(true)
+    } 
+    
+    if(flag === true && (response.data[0].password !== passwordInput || response.data[0].email !== emailInput))
+    {
+      setButtonColor("");
+      setFlag(false)
+    }
+  };
+
+  const login = () => {
+    if(buttonColor) navigate("/home")
+  }
 
   return (
     <Box
@@ -43,15 +70,20 @@ function LogIn() {
           >
             Masuk Melalui Email
           </Typography>
-          <StyledTextField text="Email Address" icon={<MailOutlineIcon />} />
+          <StyledTextField text="Email Address" icon={<MailOutlineIcon />}  onChange={event => {setEmailInput(event.target.value)}}/>
           <StyledTextField
+            onChange={event => {setPasswordInput(event.target.value)}}
             text="Password"
             icon={<LockOutlinedIcon />}
             marginTop="16px"
             type="password"
           />
         </Box>
-        <StyledButton text="Masuk" marginTop="32px" style="fill" onClick={() => navigate("/home")}/>
+        <StyledButton text="Masuk" marginTop="32px" style="fill" 
+        // onClick={() => navigate("/home")}
+        btnColorChange={buttonColor}
+        onClick={login}
+        />
       </Box>
       
     </Box>

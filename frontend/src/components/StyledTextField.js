@@ -1,5 +1,5 @@
 import { Box, Input, } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { THEME } from "../constants/Theme";
 
 function StyledTextField({
@@ -10,7 +10,11 @@ function StyledTextField({
   marginTop,
   type,
   padding,
+  onChange,
 }) {
+
+  const [password, setPassword] = React.useState('');
+
   return (
     <Box
       sx={{
@@ -43,6 +47,8 @@ function StyledTextField({
       )}
 
       <Input
+        // onChange={event => {setPassword(event.target.value)}}
+        onChange={onChange}
         placeholder={text}
         sx={{ color: THEME.GREY_PRIMARY, fontSize: "14px", width: "100%" }}
         disableUnderline="true"

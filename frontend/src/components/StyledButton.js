@@ -11,6 +11,7 @@ function StyledButton({
   onClick,
   borderRadius,
   noShadow,
+  btnColorChange
 }) {
   return (
     <Button
@@ -26,7 +27,7 @@ function StyledButton({
         ...(style === "contained" && {
           backgroundColor: THEME.GREEN_PRIMARY,
         }),
-        ...(style === "fill" && {
+        ...(style === "fill" && !btnColorChange && {
           backgroundColor: THEME.GREY_SECONDARY,
         }),
         width: width || "100%",
@@ -46,7 +47,7 @@ function StyledButton({
         ...(style === "contained" && {
           backgroundColor: THEME.GREEN_PRIMARY,
         }),
-        ...(style === "fill" && {
+        ...(style === "fill" && !btnColorChange && {
           backgroundColor: THEME.GREY_PRIMARY,
         }),
           borderColor: style === "outlined" ? THEME.GREEN_PRIMARY : "none",
