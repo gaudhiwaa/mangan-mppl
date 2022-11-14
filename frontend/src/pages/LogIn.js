@@ -16,31 +16,32 @@ function LogIn() {
   const [emailInput, setEmailInput] = useState("")
   const [passwordInput, setPasswordInput] = useState("")
   const [buttonColor, setButtonColor] = useState("")
-  const [comments,setComments]=useState([])
+  const [response,setResponse] = useState([])
   const [flag, setFlag]= useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
-    auth()
+    btnColor()
   },);
 
-  const auth = async () => {
+  const btnColor = async () => {
     const response = await axios.get("http://localhost:8080/customers");
-  
-    if (response.data[0].password === passwordInput && response.data[0].email === emailInput) {
+    setResponse(response.data)
+
+    if (passwordInput.length >= 8 &&  emailInput.includes("@gmail.com")) {
       setButtonColor(THEME.GREEN_PRIMARY);
       setFlag(true)
     } 
     
-    if(flag === true && (response.data[0].password !== passwordInput || response.data[0].email !== emailInput))
+    if(flag === true && (passwordInput.length < 8  || !emailInput.includes("@gmail.com")))
     {
       setButtonColor("");
       setFlag(false)
     }
   };
 
-  const login = () => {
-    if(buttonColor) navigate("/home")
+  const auth = () => {
+    if(passwordInput === response[0].password && emailInput === response[0].email ) navigate("/home")
   }
 
   return (
@@ -82,7 +83,7 @@ function LogIn() {
         <StyledButton text="Masuk" marginTop="32px" style="fill" 
         // onClick={() => navigate("/home")}
         btnColorChange={buttonColor}
-        onClick={login}
+        onClick={auth}
         />
       </Box>
       
