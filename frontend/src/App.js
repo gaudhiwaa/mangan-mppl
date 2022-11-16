@@ -13,6 +13,7 @@ import PaymentGateway from "./pages/PaymentGateway";
 import Location from "./pages/location/LocationChange";
 import LocationList from "./pages/location/LocationList";
 import Voucher from "./pages/Voucher";
+import Product from "./pages/Product";
 
 const CustomizedSize = styled(Box)({
   backgroundColor: THEME.WHITE,
@@ -46,6 +47,7 @@ function App() {
             <Route path="/changelocation" element={<Location />} />
             <Route path="/locationlist" element={<LocationList />} />
             <Route path="/voucher" element={<Voucher />} />
+            <Route path="/product" element={<Product />} />
           </Routes>
         </CustomizedSize>
       </Center>

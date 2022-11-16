@@ -12,11 +12,52 @@ import StyledButton from "../../components/StyledButton";
 import { REGISTER } from "../../constants/Typography";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function RegisterPhase1() {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [buttonColor, setButtonColor] = useState("")
+  const [response,setResponse] = useState([])
+  const [flag, setFlag]= useState(false)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    btnColor()
+  },);
+
+  const btnColor = async () => {
+    const response = await axios.get("http://localhost:8080/customers");
+    setResponse(response.data)
+
+    if (password.length >= 8 &&  email.includes("@gmail.com") && name) {
+      setButtonColor(THEME.GREEN_PRIMARY);
+      setFlag(true)
+    } 
+    
+    if(flag === true && (password.length < 8  || !email.includes("@gmail.com") || !name))
+    {
+      setButtonColor("");
+      setFlag(false)
+    }
+  };
+
+  const saveUser = async (e) => {
+    e.preventDefault();
+    console.log("halo!")
+    try {
+      await axios.post("http://localhost:8080/customers", {
+        name,
+        email,
+        password,
+      });
+      if(buttonColor) navigate("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box
@@ -47,6 +88,7 @@ function RegisterPhase1() {
           </Typography>
           <StyledTextField
             text={REGISTER.NamaLengkap}
+            onChange={(e) => setName(e.target.value)}
             icon={
               <AccountCircleOutlinedIcon
                 sx={{ width: "23px", height: "23px" }}
@@ -57,8 +99,10 @@ function RegisterPhase1() {
             text={REGISTER.AlamatEmail}
             icon={<MailOutlineIcon sx={{ width: "21px", height: "21px" }} />}
             marginTop="16px"
+            onChange={(e) => setEmail(e.target.value)}
           />
           <StyledTextField
+            onChange={(e) => setPassword(e.target.value)}
             text={REGISTER.Password}
             icon={<LockOutlinedIcon sx={{ width: "21px", height: "21px" }} />}
             marginTop="16px"
@@ -69,7 +113,9 @@ function RegisterPhase1() {
           text={REGISTER.Selanjutnya}
           marginTop="32px"
           style="fill"
-          onClick={() => navigate("/register-phase-2")}
+          btnColorChange={buttonColor}
+          // onClick={() => navigate("/home")}
+          onClick={saveUser}
         />
       </Box>
     </Box>

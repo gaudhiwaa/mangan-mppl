@@ -41,7 +41,9 @@ function LogIn() {
   };
 
   const auth = () => {
-    if(passwordInput === response[0].password && emailInput === response[0].email ) navigate("/home")
+    for(let i=0; i<response.length; i++) {
+      if(passwordInput === response[i].password && emailInput === response[i].email ) navigate("/home")
+    }
   }
 
   return (

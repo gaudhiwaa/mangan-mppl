@@ -15,3 +15,6 @@ Content-Type: application/json
     "password": "mpplceria",
     "address": "Jl. Teknik Komputer IV, Keputih, Surabaya"
 }
+
+###
+DELETE http://localhost:8080/customers/8

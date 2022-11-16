@@ -25,7 +25,21 @@ export const getCustomerById = async(req, res) =>{
 export const createCustomer = async(req, res) =>{
     try {
         await Customer.create(req.body);
-        res.status(201).json({msg: "User Created"});
+        console.log(req.body);
+        res.status(201).json({msg: "Customer Created"});
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export const deleteCustomer = async(req, res) =>{
+    try {
+        await Customer.destroy({
+            where:{
+                id: req.params.id
+            }
+        });
+        res.status(200).json({msg: "Customer Deleted"});
     } catch (error) {
         console.log(error.message);
     }

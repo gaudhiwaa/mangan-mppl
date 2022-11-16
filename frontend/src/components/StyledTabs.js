@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
 import SelectedMenu from "./SelectedMenu";
 import AyamPangsit from "../assets/product/AyamPangsit.png";
+import { useNavigate } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,6 +56,7 @@ const CustomTab = styled(Tab)({
 
 export default function StyledTabs() {
   const [value, setValue] = React.useState(0);
+  const navigate = useNavigate();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -106,6 +108,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -117,6 +120,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6} sx={{}}>
@@ -128,6 +132,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -139,6 +144,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
             </Grid>
@@ -159,6 +165,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -170,6 +177,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6} sx={{}}>
@@ -181,6 +189,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -192,6 +201,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
             </Grid>
@@ -212,6 +222,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -223,6 +234,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6} sx={{}}>
@@ -234,6 +246,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -245,6 +258,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
             </Grid>
@@ -265,6 +279,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -276,6 +291,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6} sx={{}}>
@@ -287,6 +303,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -298,6 +315,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
             </Grid>
@@ -318,6 +336,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -329,6 +348,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6} sx={{}}>
@@ -340,6 +360,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -351,6 +372,7 @@ export default function StyledTabs() {
                   rating="5.0"
                   sold="809"
                   image={AyamPangsit}
+                  onClick={() => navigate("/product")}
                 />
               </Grid>
             </Grid>

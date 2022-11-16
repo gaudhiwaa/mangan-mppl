@@ -14,18 +14,23 @@ function SelectedMenu({
   sold,
   marginRight,
   tabs,
+  onClick
 }) {
   return (
     <Box>
       {tabs ? (
-        <>
+   
           <Box
             sx={{
               width: "164px",
               padding: "22px 11px 22px 11px",
               border: "1px solid #F5F5F5",
               borderRadius: "8px",
+              "&:hover": {
+                cursor: "pointer",
+              },
             }}
+            onClick={onClick}
           >
             <img src={image} width="164px" alt="menu"/>
             <Box>
@@ -93,7 +98,6 @@ function SelectedMenu({
               <StyledButton text={"Tambah"} style="outlined" height="26px" noShadow/>
             </Box>
           </Box>
-        </>
       ) : (
         <Box
           sx={{
@@ -101,7 +105,11 @@ function SelectedMenu({
             padding: "22px 11px 22px 11px",
             border: "1px solid #F5F5F5",
             borderRadius: "8px",
+            "&:hover": {
+              cursor: "pointer",
+            },
           }}
+          onClick={onClick}
         >
           <img src={image} alt="menu"/>
           <Box>

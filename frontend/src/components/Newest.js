@@ -16,51 +16,65 @@ function Newest({ title, discount, image, price }) {
         // borderRadius: "8px",
       }}
     >
-        <Box sx={{display: 'flex'}}>
-      <img src={image} alt="menu"/>
-      <Box sx={{marginLeft: '10px'}}>
-        <Typography sx={{ fontSize: "14px", fontWeight: 500 }}>
-          {title}
-        </Typography>
-        <Box sx={{ display: "flex", alignItems:'center', marginTop: '8px', marginBottom: '8px' }}>
-          <Typography
+      <Box sx={{ display: "flex" }}>
+        <img src={image} alt="menu" />
+        <Box sx={{ marginLeft: "10px" }}>
+          <Typography sx={{ fontSize: "14px", fontWeight: 500 }}>
+            {title}
+          </Typography>
+          <Box
             sx={{
-              backgroundColor: "red",
-              height: "19px",
-              width: "30px",
-              color: "white",
-              borderRadius: "4px",
-              fontWeight: 600,
-              fontSize: "10px",
               display: "flex",
-              justifyContent: "center",
               alignItems: "center",
-              marginRight: "8px",
+              marginTop: "8px",
+              marginBottom: "8px",
             }}
           >
-            {discount} %
-          </Typography>
-          <Typography
-            sx={{
-              fontWeight: 400,
-              fontSize: "10px",
-              color: THEME.GREY_SECONDARY,
-              textDecoration: "line-through",
-            }}
-          >
-            {price} / porsi
-          </Typography>
-        </Box>
-        <Typography sx={{ fontSize: "14px", marginTop: "6px" }}>
+            <Typography
+              sx={{
+                backgroundColor: "red",
+                height: "19px",
+                width: "30px",
+                color: "white",
+                borderRadius: "4px",
+                fontWeight: 600,
+                fontSize: "10px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: "8px",
+              }}
+            >
+              {discount} %
+            </Typography>
+            <Typography
+              sx={{
+                fontWeight: 400,
+                fontSize: "10px",
+                color: THEME.GREY_SECONDARY,
+                textDecoration: "line-through",
+              }}
+            >
+              {price} / porsi
+            </Typography>
+          </Box>
+          <Typography sx={{ fontSize: "14px", marginTop: "6px" }}>
             <span style={{ fontWeight: "bold" }}>
               {price - (price * discount) / 100}
             </span>{" "}
             / porsi
           </Typography>
+        </Box>
       </Box>
-      </Box>
-      <Box sx={{ display: "flex", alignItems: "flex-end", height: '75px'}}>
-        <StyledButton style="outlined" text={"Tambah"} height="26px" fontSize="12px" borderRadius="4px" noShadow/>
+      <Box sx={{ display: "flex", alignItems: "flex-end", height: "75px" }}>
+        <StyledButton
+          style="outlined"
+          text={"Tambah"}
+          height="26px"
+          fontSize="12px"
+          borderRadius="4px"
+          noShadow
+        />
       </Box>
     </Box>
   );

@@ -11,7 +11,8 @@ function StyledButton({
   onClick,
   borderRadius,
   noShadow,
-  btnColorChange
+  btnColorChange,
+  border
 }) {
   return (
     <Button
@@ -37,7 +38,7 @@ function StyledButton({
         fontSize: fontSize || "14px",
         color: style === "outlined" ? THEME.GREEN_PRIMARY : "white",
         border:
-          style === "outlined" ? "0.8px solid" + THEME.GREEN_PRIMARY : "none",
+          style === "outlined" ? border? border : "0.8px solid" + THEME.GREEN_PRIMARY : "none",
         marginTop: marginTop || "0",
         "&:hover": {
           backgroundColor: THEME.GREEN_PRIMARY,

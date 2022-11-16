@@ -7,8 +7,9 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import { THEME } from "../constants/Theme";
 import { useNavigate } from "react-router-dom";
+import BasketIcon from "../assets/product/BasketIcon";
 
-export default function AppBarTop({ text, line, extButtonTxt }) {
+export default function AppBarTop({ text, line, extButtonTxt, addBasket}) {
   const navigate = useNavigate();
   return (
     <Box sx={{ width: "100%" }}>
@@ -62,7 +63,7 @@ export default function AppBarTop({ text, line, extButtonTxt }) {
                 onClick={() => navigate("/changelocation")}
               >
                 {extButtonTxt}
-              </Typography>
+              </Typography> 
             </>
           ) : (
             <>
@@ -95,6 +96,24 @@ export default function AppBarTop({ text, line, extButtonTxt }) {
               >
                 {text}
               </Typography>
+
+              {addBasket? <Box sx={{"&:hover": {
+                  cursor: "pointer",
+                },}}><BasketIcon/></Box>:
+              <Typography
+              sx={{
+                fontWeight: "bold",
+                fontSize: "14px",
+                color: THEME.GREEN_PRIMARY,
+                marginTop: "4px",
+                "&:hover": {
+                  cursor: "pointer",
+                },
+              }}
+              onClick={() => navigate("/changelocation")}
+            >
+              {extButtonTxt}
+            </Typography> }
             </>
           )}
         </Toolbar>

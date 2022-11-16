@@ -1,18 +1,19 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import StorefrontIcon from '@mui/icons-material/Storefront';
-import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
-import { THEME } from '../constants/Theme';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
+import { THEME } from "../constants/Theme";
+import { Typography } from "@mui/material";
 
 export default function AppBarBot() {
   const [value, setValue] = React.useState(0);
 
   return (
-    <Box sx={{ width:"100%" }}>
+    <Box sx={{ width: "100%" }}>
       <BottomNavigation
         showLabels
         value={value}
@@ -20,18 +21,36 @@ export default function AppBarBot() {
           setValue(newValue);
         }}
         sx={{
-            "& .MuiBottomNavigationAction-root, svg": {
-                color: THEME.GREY_PRIMARY
-              },
-              "& .Mui-selected, .Mui-selected > svg": {
-                color: THEME.GREEN_PRIMARY
-              }
+          "& .MuiBottomNavigationAction-root, svg": {
+            color: THEME.GREY_PRIMARY,
+          },
+          "& .Mui-selected, .Mui-selected > svg": {
+            color: THEME.GREEN_PRIMARY,
+          },
+          position: "fixed",
+          marginLeft: "auto",
+          height: '67px',
+          bottom: 0,
+          marginRight: "auto",
+          left: 0,
+          right: 0,
+          width: "445px",
+          boxShadow: "0 -5px 12px -5px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <BottomNavigationAction label="Belanja" icon={<StorefrontIcon />} />
-        <BottomNavigationAction label="Keranjang" icon={<ShoppingCartOutlinedIcon />} />
-        <BottomNavigationAction label="Transaksi" icon={<ReceiptOutlinedIcon />} />
-        <BottomNavigationAction label="Profil" icon={<AccountCircleOutlinedIcon />} />
+        <BottomNavigationAction label={<Typography sx={{fontSize: '10px', mt: '4px'}}>Belanja</Typography>} icon={<StorefrontIcon sx={{mt: '4px'}}/>}/>
+        <BottomNavigationAction
+          label={<Typography sx={{fontSize: '10px', mt: '4px'}}>Keranjang</Typography>}
+          icon={<ShoppingCartOutlinedIcon sx={{mt: '4px'}}/>}
+        />
+        <BottomNavigationAction
+          label={<Typography sx={{fontSize: '10px', mt: '4px'}}>Transaksi</Typography>}
+          icon={<ReceiptOutlinedIcon sx={{mt: '4px'}}/>}
+        />
+        <BottomNavigationAction
+          label={<Typography sx={{fontSize: '10px', mt: '4px'}}>Profil</Typography>}
+          icon={<AccountCircleOutlinedIcon sx={{mt: '4px'}}/>}
+        />
       </BottomNavigation>
     </Box>
   );

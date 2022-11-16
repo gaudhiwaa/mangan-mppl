@@ -130,7 +130,7 @@ function Home() {
             {/* typo */}
             <Box
               sx={{
-                marginLeft: "5px",
+                marginLeft: "8px",
               }}
             >
               <Typography
@@ -172,7 +172,7 @@ function Home() {
             {/* typo */}
             <Box
               sx={{
-                marginLeft: "5px",
+                marginLeft: "8px",
               }}
             >
               <Typography
@@ -215,6 +215,9 @@ function Home() {
                   color: THEME.GREEN_PRIMARY,
                   fontWeight: "bold",
                   fontSize: "12px",
+                  "&:hover": {
+                    cursor: "pointer",
+                  },
                 }}
               >
                 {HOME.LihatSemua}
@@ -228,7 +231,8 @@ function Home() {
               </Typography>
             </Box>
           </Box>
-          <Box sx={{ display: "flex", marginTop: "13px", overflow: "scroll" }}>
+          <Box sx={{ marginTop: "13px", overflow: "scroll", width: "447px", ml: '-20px' }}>
+            <Box sx={{ml: '20px', display: "flex",}}>
             <Box sx={{ marginRight: "8px" }}>
               <SelectedMenu
                 title={"Ayam Pangsit"}
@@ -237,6 +241,7 @@ function Home() {
                 rating="5.0"
                 sold="809"
                 image={AyamPangsit}
+                onClick={() => navigate("/product")}
               />
             </Box>
             <Box sx={{ marginRight: "8px" }}>
@@ -247,6 +252,7 @@ function Home() {
                 rating="5.0"
                 sold="809"
                 image={AyamPangsit}
+                onClick={() => navigate("/product")}
               />
             </Box>
             <Box sx={{ marginRight: "8px" }}>
@@ -257,6 +263,7 @@ function Home() {
                 rating="5.0"
                 sold="809"
                 image={AyamPangsit}
+                onClick={() => navigate("/product")}
               />
             </Box>
             <Box sx={{ marginRight: "8px" }}>
@@ -267,19 +274,18 @@ function Home() {
                 rating="5.0"
                 sold="809"
                 image={AyamPangsit}
+                onClick={() => navigate("/product")}
               />
             </Box>
+          </Box>
           </Box>
         </Box>
         <SectionTitle title={HOME.PaketHemat} desc={HOME.WarungTerpercayaDi} />
-        <Box
-          sx={{
-            display: "flex",
-            marginTop: "13px",
-            overflow: "scroll",
-            position: "relative",
-          }}
-        >
+        
+        {/* <Box sx={{ marginTop: "13px", overflow: "scroll", width: "447px", ml: '-20px' }}>
+            <Box sx={{ml: '20px', display: "flex",}}></Box> */}
+        <Box sx={{ marginTop: "13px", overflow: "scroll", width: "447px", ml: '-20px' }}>
+            <Box sx={{ml: '20px', display: "flex",}}>
           <Box sx={{ marginRight: "8px" }}>
             <EconomicalPacket
               title={"Ayam Pangsit"}
@@ -311,6 +317,7 @@ function Home() {
               sold="101"
               image={AyamPangsit}
             />
+          </Box>
           </Box>
         </Box>
         <SectionTitle title={HOME.Terbaru} desc={HOME.ProdukPilihanPaling} />
@@ -343,7 +350,7 @@ function Home() {
           </Box>
         </Box>
         <SectionTitle title={HOME.Rekomendasi} />
-        <Box>
+        <Box sx={{mb: '50px'}}>
           <StyledTabs />
         </Box>
       </Box>

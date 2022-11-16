@@ -9,15 +9,29 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import StyledButton from "../../components/StyledButton";
 // import { useState } from "react";
 import { REGISTER } from "../../constants/Typography";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
+import axios from "axios";
 
 
 function RegisterPhase2() {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
+  const { id } = useParams();
   const navigate = useNavigate()
+
+  const updateUser = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.patch(`http://localhost:8080/users/${id}`, {
+        
+      });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box

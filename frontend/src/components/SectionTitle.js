@@ -24,6 +24,9 @@ function SectionTitle({title, desc}) {
               color: THEME.GREEN_PRIMARY,
               fontWeight: "bold",
               fontSize: "12px",
+              "&:hover": {
+                cursor: "pointer",
+              },
             }}
           >
             {HOME.LihatSemua}
