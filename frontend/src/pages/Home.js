@@ -165,7 +165,9 @@ function Home() {
               "&:hover": {
                 cursor: "pointer",
               },
+              
             }}
+            onClick={() => navigate("/point")}
           >
             <PointIcon />
             <Box></Box>
