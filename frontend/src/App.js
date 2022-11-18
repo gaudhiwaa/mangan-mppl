@@ -15,6 +15,7 @@ import LocationList from "./pages/location/LocationList";
 import Voucher from "./pages/Voucher";
 import Product from "./pages/Product";
 import Point from "./pages/Point";
+import Checkout from "./pages/Checkout";
 
 const CustomizedSize = styled(Box)({
   backgroundColor: THEME.WHITE,
@@ -50,6 +51,7 @@ function App() {
             <Route path="/voucher" element={<Voucher />} />
             <Route path="/product" element={<Product />} />
             <Route path="/point" element={<Point />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </CustomizedSize>
       </Center>

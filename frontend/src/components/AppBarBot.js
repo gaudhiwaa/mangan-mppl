@@ -8,9 +8,11 @@ import StorefrontIcon from "@mui/icons-material/Storefront";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import { THEME } from "../constants/Theme";
 import { Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function AppBarBot() {
   const [value, setValue] = React.useState(0);
+  const navigate = useNavigate();
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -41,14 +43,17 @@ export default function AppBarBot() {
         <BottomNavigationAction label={<Typography sx={{fontSize: '10px', mt: '4px'}}>Belanja</Typography>} icon={<StorefrontIcon sx={{mt: '4px'}}/>}/>
         <BottomNavigationAction
           label={<Typography sx={{fontSize: '10px', mt: '4px'}}>Keranjang</Typography>}
+          onClick={() => navigate("/checkout")}
           icon={<ShoppingCartOutlinedIcon sx={{mt: '4px'}}/>}
         />
         <BottomNavigationAction
           label={<Typography sx={{fontSize: '10px', mt: '4px'}}>Transaksi</Typography>}
+          onClick={() => navigate("/transactions")}
           icon={<ReceiptOutlinedIcon sx={{mt: '4px'}}/>}
         />
         <BottomNavigationAction
           label={<Typography sx={{fontSize: '10px', mt: '4px'}}>Profil</Typography>}
+          onClick={() => navigate("/profile")}
           icon={<AccountCircleOutlinedIcon sx={{mt: '4px'}}/>}
         />
       </BottomNavigation>
