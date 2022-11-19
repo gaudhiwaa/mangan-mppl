@@ -7,10 +7,11 @@ import { THEME } from "../constants/Theme";
 import { useNavigate } from "react-router-dom";
 import Beras from "../assets/product/Beras.png";
 import StyledButton from "../components/StyledButton";
+import QuantityButton from "../components/QuantityButton";
 
 function Checkout() {
   const [mainLoc, setMainLoc] = React.useState({ 1: true });
-  const[ItemQty, setItemQty] = React.useState(0)
+  const [total, setTotal] = React.useState(0);
   const navigate = useNavigate();
 
   const handleBtn = (btnId) => (e) => {
@@ -31,6 +32,7 @@ function Checkout() {
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
+        minWidth: PADDING,
       }}
     >
       <AppBarTop text={"Keranjang"} line />
@@ -71,14 +73,17 @@ function Checkout() {
         }}
       />
 
+      {/* 1 */}
       <Box
         sx={{
           display: "flex",
           alignItems: "flex-start",
           width: PADDING,
           mt: "16px",
+          // justifyContent: 'space-between'
         }}
       >
+        
         <Box
           sx={{
             borderRadius: "50%",
@@ -87,52 +92,60 @@ function Checkout() {
             background: "#F5F5F5",
           }}
         />
-        <Box sx={{ display: "flex" }}>
-          <img src={Beras} width="53px" height={"42px"} />
-          <Box>
-            <Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
-              Beras Organik
-            </Typography>
-            <Typography sx={{ color: "#828282", fontSize: "10px" }}>
-              Pilihan : <span style={{ color: "#333333" }}>Merah</span>
-            </Typography>
-            <Typography sx={{ color: "#828282", fontSize: "10px" }}>
-              Catatan :{" "}
-              <span style={{ color: "#333333" }}>
-                Yang masih lama expirednya
-              </span>
-            </Typography>
-            <Box sx={{ display: "flex", mt: "7px" }}>
-              <Box
-                sx={{
-                  backgroundColor: "#f04454",
-                  width: "30px",
-                  height: "19px",
-                  borderRadius: "4px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Typography
-                  sx={{ color: "white", fontSize: "10px", fontWeight: 600 }}
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "flex-start", ml: "16px" }}>
+            <img src={Beras} width="53px" height={"42px"} />
+            <Box sx={{ ml: "10px" }}>
+              <Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
+                Beras Organik
+              </Typography>
+              <Typography sx={{ color: "#828282", fontSize: "10px" }}>
+                Pilihan : <span style={{ color: "#333333" }}>Merah</span>
+              </Typography>
+              <Typography sx={{ color: "#828282", fontSize: "10px" }}>
+                Catatan :{" "}
+                <span style={{ color: "#333333" }}>
+                  Yang masih lama expirednya
+                </span>
+              </Typography>
+              <Box sx={{ display: "flex", mt: "7px" }}>
+                <Box
+                  sx={{
+                    backgroundColor: "#f04454",
+                    width: "30px",
+                    height: "19px",
+                    borderRadius: "4px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
                 >
-                  20%
+                  <Typography
+                    sx={{ color: "white", fontSize: "10px", fontWeight: 600 }}
+                  >
+                    20%
+                  </Typography>
+                </Box>
+                <Typography
+                  sx={{
+                    fontSize: "10px",
+                    color: "#A6A6A6",
+                    textDecoration: "line-through",
+                    marginLeft: "8px",
+                    marginTop: "2px",
+                  }}
+                >
+                  55.000 / 5kg
                 </Typography>
               </Box>
-              <Typography
-                sx={{
-                  fontSize: "10px",
-                  color: "#A6A6A6",
-                  textDecoration: "line-through",
-                  marginLeft: "8px",
-                  marginTop: "2px",
-                }}
-              >
-                55.000 / 5kg
-              </Typography>
-            </Box>
-            <Box sx={{display: 'flex', justifyContent: 'space-between', width: '300px'}}>
+
               <Typography
                 sx={{
                   fontSize: "12px",
@@ -144,14 +157,129 @@ function Checkout() {
                 </span>
                 / 5 kg
               </Typography>
-              <Box sx={{display: 'flex'}}>
-                <StyledButton text={""} style="outlined" noShadow width={"24px"} height={"24px"} borderRadius="4px"/>
-                <StyledButton text={"–"} style="outlined" noShadow width={"24px"} height={"24px"} borderRadius="4px"/>
-                <Typography sx={{fontSize: '12px', fontWeight: 600}}>{ItemQty}</Typography>
-                <StyledButton text={"+"} style="outlined" noShadow width={"24px"} height={"24px"} borderRadius="4px"/>
-              </Box>
             </Box>
           </Box>
+          <QuantityButton />
+        </Box>
+      </Box>
+      {/* 2 */}
+      {/* 1 */}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "flex-start",
+          width: PADDING,
+          mt: "16px",
+          // justifyContent: 'space-between'
+        }}
+      >
+        
+        <Box
+          sx={{
+            borderRadius: "50%",
+            width: "24px",
+            height: "24px",
+            background: "#F5F5F5",
+          }}
+        />
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "flex-start", ml: "16px" }}>
+            <img src={Beras} width="53px" height={"42px"} />
+            <Box sx={{ ml: "10px" }}>
+              <Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
+                Beras Organik
+              </Typography>
+              <Typography sx={{ color: "#828282", fontSize: "10px" }}>
+                Pilihan : <span style={{ color: "#333333" }}>Merah</span>
+              </Typography>
+              <Typography sx={{ color: "#828282", fontSize: "10px" }}>
+                Catatan :{" "}
+                <span style={{ color: "#333333" }}>
+                  Yang masih lama expirednya
+                </span>
+              </Typography>
+              <Box sx={{ display: "flex", mt: "7px" }}>
+                <Box
+                  sx={{
+                    backgroundColor: "#f04454",
+                    width: "30px",
+                    height: "19px",
+                    borderRadius: "4px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography
+                    sx={{ color: "white", fontSize: "10px", fontWeight: 600 }}
+                  >
+                    20%
+                  </Typography>
+                </Box>
+                <Typography
+                  sx={{
+                    fontSize: "10px",
+                    color: "#A6A6A6",
+                    textDecoration: "line-through",
+                    marginLeft: "8px",
+                    marginTop: "2px",
+                  }}
+                >
+                  55.000 / 5kg
+                </Typography>
+              </Box>
+
+              <Typography
+                sx={{
+                  fontSize: "12px",
+                  mt: "8px",
+                }}
+              >
+                <span style={{ fontWeight: "bold", fontSize: "12px" }}>
+                  45.000{" "}
+                </span>
+                / 5 kg
+              </Typography>
+            </Box>
+          </Box>
+          <QuantityButton />
+        </Box>
+      </Box>
+
+      <Box sx={{ position: "fixed", bottom: 0, mb: "16px" }}>
+        <Box
+          sx={{
+            width: PADDING,
+            height: "1px",
+            background: "#F5F5F5",
+            display: "absolute",
+            bottom: "0",
+          }}
+        />
+        <Box
+          sx={{
+            display: "flex",
+            width: PADDING,
+            justifyContent: "space-between",
+            mt: "11px",
+          }}
+        >
+          <Typography sx={{ fontSize: "14px", fontWeight: 600 }}>
+            Total Harga
+          </Typography>
+          <Typography sx={{ fontSize: "14px", fontWeight: 600 }}>
+            Rp {total}
+          </Typography>
+        </Box>
+        <Box sx={{ width: PADDING, mt: "12px" }}>
+          <StyledButton text={"Checkout"} />
         </Box>
       </Box>
     </Box>

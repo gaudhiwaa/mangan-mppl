@@ -12,7 +12,9 @@ function StyledButton({
   borderRadius,
   noShadow,
   btnColorChange,
-  border
+  border,
+  minWidth,
+  minHeight
 }) {
   return (
     <Button
@@ -31,6 +33,8 @@ function StyledButton({
         ...(style === "fill" && !btnColorChange && {
           backgroundColor: THEME.GREY_SECONDARY,
         }),
+        minHeight: minHeight || 'none',
+        minWidth: minWidth || 'none',
         width: width || "100%",
         height: height || "45px",
         fontWeight: "bold",
