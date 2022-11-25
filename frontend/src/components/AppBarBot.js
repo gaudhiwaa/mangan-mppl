@@ -31,7 +31,7 @@ export default function AppBarBot() {
           },
           position: "fixed",
           marginLeft: "auto",
-          height: '67px',
+          height: "67px",
           bottom: 0,
           marginRight: "auto",
           left: 0,
@@ -40,21 +40,38 @@ export default function AppBarBot() {
           boxShadow: "0 -5px 12px -5px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <BottomNavigationAction label={<Typography sx={{fontSize: '10px', mt: '4px'}}>Belanja</Typography>} icon={<StorefrontIcon sx={{mt: '4px'}}/>}/>
         <BottomNavigationAction
-          label={<Typography sx={{fontSize: '10px', mt: '4px'}}>Keranjang</Typography>}
+          label={
+            <Typography sx={{ fontSize: "10px", mt: "4px" }}>
+              Belanja
+            </Typography>
+          }
+          icon={<StorefrontIcon sx={{ mt: "4px" }} />}
+        />
+        <BottomNavigationAction
+          label={
+            <Typography sx={{ fontSize: "10px", mt: "4px" }}>
+              Keranjang
+            </Typography>
+          }
           onClick={() => navigate("/checkout")}
-          icon={<ShoppingCartOutlinedIcon sx={{mt: '4px'}}/>}
+          icon={<ShoppingCartOutlinedIcon sx={{ mt: "4px" }} />}
         />
         <BottomNavigationAction
-          label={<Typography sx={{fontSize: '10px', mt: '4px'}}>Transaksi</Typography>}
+          label={
+            <Typography sx={{ fontSize: "10px", mt: "4px" }}>
+              Transaksi
+            </Typography>
+          }
           onClick={() => navigate("/transactions")}
-          icon={<ReceiptOutlinedIcon sx={{mt: '4px'}}/>}
+          icon={<ReceiptOutlinedIcon sx={{ mt: "4px" }} />}
         />
         <BottomNavigationAction
-          label={<Typography sx={{fontSize: '10px', mt: '4px'}}>Profil</Typography>}
+          label={
+            <Typography sx={{ fontSize: "10px", mt: "4px" }}>Profil</Typography>
+          }
           onClick={() => navigate("/profile")}
-          icon={<AccountCircleOutlinedIcon sx={{mt: '4px'}}/>}
+          icon={<AccountCircleOutlinedIcon sx={{ mt: "4px" }} />}
         />
       </BottomNavigation>
     </Box>

@@ -9,7 +9,7 @@ POST http://localhost:8080/customers
 Content-Type: application/json
 
 {
-    "name" : "Gaudhiwaa Hendrasto",
+    "name" : "Halo",
     "email": "gaudhiwaa@gmail.com",
     "gender": "Male",
     "password": "mpplceria",

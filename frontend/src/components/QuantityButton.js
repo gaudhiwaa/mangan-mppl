@@ -17,6 +17,9 @@ function QuantityButton({}) {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          "&:hover": {
+            cursor: "pointer",
+          },
         }}
       >
         <EditIcon />
@@ -31,6 +34,9 @@ function QuantityButton({}) {
           display: "flex",
           justifyContent: "center",
           color: THEME.GREEN_PRIMARY,
+          "&:hover": {
+            cursor: "pointer",
+          },
         }}
       >
         <Typography>–</Typography>
@@ -49,6 +55,9 @@ function QuantityButton({}) {
           justifyContent: "center",
           background: THEME.GREEN_PRIMARY,
           color: "white",
+          "&:hover": {
+            cursor: "pointer",
+          },
         }}
       >
         <Typography>+</Typography>
