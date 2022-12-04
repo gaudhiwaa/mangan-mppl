@@ -17,7 +17,7 @@ function EconomicalPacket({ title, rating, sold, image }) {
           borderRadius: "8px",
         }}
       >
-        <img src={image} alt="menu"/>
+        <img src={image} width="105px" height="86px" alt="menu"/>
 
         <Typography
           sx={{ fontSize: "12px", fontWeight: 500, marginTop: "8px" }}

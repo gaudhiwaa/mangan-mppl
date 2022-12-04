@@ -1,10 +1,10 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import EditIcon from "../assets/location/EditIcon";
 import AppBarTop from "../components/AppBarTop";
 import { PADDING } from "../constants/Padding";
 import { THEME } from "../constants/Theme";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BerasReview from "../assets/product/BerasReview.png";
 import Beras from "../assets/product/Beras.png";
 import StarIcon from "@mui/icons-material/Star";
@@ -16,10 +16,27 @@ import AyamPangsit from "../assets/product/AyamPangsit.png";
 import LocationOutlinedIcon from "../assets/product/LocationOutlinedIcon";
 import Rating from "../components/Rating";
 import SelectedMenu from "../components/SelectedMenu";
+import { AppContext } from "../App";
 
 function Product() {
+  const {productId} = useParams()
+  const {APIFoods, setAPIFoods} = useContext(AppContext);
+  const apk = APIFoods.data
   const [location, setLocation] = React.useState("Arandra Residence");
   const navigate = useNavigate();
+  
+  // const [id, setId] = useState()
+  
+  const thisProduct = APIFoods.find(prod => prod.id.toString() === productId)
+  
+  useEffect(()=>{
+    
+
+
+    // const thisProduct = APIFoods.data.find(prod => prod.id === 2)
+    // {console.log(thisProduct, productId)}
+    
+  },[APIFoods])
 
   return (
     <Box
@@ -36,10 +53,10 @@ function Product() {
       <Box sx={{ width: PADDING - 10 }}>
         <Box sx={{ marginTop: "18px", alignItems: "center" }}>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <img src={Beras} alt="product" width={"340px"} height={"247px"} />
+            <img src={thisProduct.f_image} alt="product" width={"340px"} height={"247px"} />
           </Box>
           <Typography sx={{ fontSize: "18px", fontWeight: 500 }}>
-            Beras Organik
+          {thisProduct.f_name}
           </Typography>
           <Box sx={{ display: "flex", mt: "7px" }}>
             <Box
@@ -77,7 +94,7 @@ function Product() {
               mt: "8px",
             }}
           >
-            <span style={{ fontWeight: "bold" }}>45.000 </span>/ 5 kg
+            <span style={{ fontWeight: "bold" }}>Rp {thisProduct.f_price - thisProduct.f_price*thisProduct.f_discount/100} </span>
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center", mt: "6px" }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -138,11 +155,7 @@ function Product() {
           </Box>
         </Box>
         <Typography sx={{ fontSize: "12px", color: "#4F4F4F", mt: "4px" }}>
-          Beras putih Long Grain Low IG Organik bebas dari unsur pestisida
-          kimia. Memiliki kandungan nutrisi dan mineral yang tinggi, kandungan
-          glukosa, karbohidrat dan proteinnya mudah terurai, sehingga aman dan
-          sangat baik dikonsumsi untuk segala usia, khususnya Ibu hamil dan
-          menyusui serta anak2 dan remaja yang sedang bertumbuh.
+          {thisProduct.f_description}
         </Typography>
       </Box>
       <Box

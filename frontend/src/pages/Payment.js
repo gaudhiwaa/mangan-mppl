@@ -9,6 +9,7 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import StyledButton from "../components/StyledButton";
 import { PADDING } from "../constants/Padding";
 import { useNavigate } from "react-router-dom";
+import BCAIcon from "../assets/payment/PaymentGatewayPict copy";
 
 function Payment() {
   const navigate = useNavigate()
@@ -33,11 +34,11 @@ function Payment() {
         }}
       >
         <Box sx={{ margin: "20px 15px 10px 15px" }}>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: 'center' }}>
             <Typography sx={{ fontSize: "12px", fontWeight: 600 }}>
               {PAYMENT.BCAVirtual}
             </Typography>
-            <Typography>X</Typography>
+            <BCAIcon/>
           </Box>
           <Box
             sx={{
@@ -189,8 +190,8 @@ function Payment() {
         </Typography>
       </Box>
       <Box sx={{width: PADDING, bottom: '0', position: 'fixed', marginBottom: '16px'}}>
-        <StyledButton text={"Belanja lagi"} onClick={() => navigate("/paymentgateway")}/>
-        <StyledButton text={"Cek Status Pesanan"} style={"outlined"} marginTop={"16px"}/>
+        <StyledButton text={"Belanja lagi"} onClick={() => navigate("/home")}/>
+        <StyledButton text={"Cek Status Pesanan"} style={"outlined"} marginTop={"16px"} onClick={() => navigate("/paymentgateway")}/>
       </Box>
     </Box>
   );

@@ -9,7 +9,7 @@ import SwipeableViews from "react-swipeable-views";
 import { Grid, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { useTheme } from "@emotion/react";
-import SelectedMenu from "./SelectedMenu";
+import Recommendation from "./Recommendation";
 import AyamPangsit from "../assets/product/AyamPangsit.png";
 import { useNavigate } from "react-router-dom";
 
@@ -80,9 +80,9 @@ export default function StyledTabs() {
           TabIndicatorProps={{ style: { background: THEME.GREEN_PRIMARY } }}
           textColor="primary"
         >
-          <CustomTab label="Seafood" />
-          <CustomTab label="Mie" />
-          <CustomTab label="Western" />
+          <CustomTab label="Sayuran" />
+          <CustomTab label="Lauk" />
+          <CustomTab label="Bumbu" />
           <CustomTab label="Sup" />
           <CustomTab label="Desert" />
           <CustomTab label="Minuman" />
@@ -100,7 +100,7 @@ export default function StyledTabs() {
               sx={{ width: "443px", ml: "-20px" }}
             >
               <Grid item xs={6} sx={{}}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -112,7 +112,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -124,7 +124,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6} sx={{}}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -136,7 +136,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -157,7 +157,7 @@ export default function StyledTabs() {
               sx={{ width: "443px", ml: "-20px" }}
             >
               <Grid item xs={6} sx={{}}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -169,7 +169,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -181,7 +181,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6} sx={{}}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -193,7 +193,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -214,7 +214,7 @@ export default function StyledTabs() {
               sx={{ width: "443px", ml: "-20px" }}
             >
               <Grid item xs={6} sx={{}}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -226,7 +226,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -238,7 +238,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6} sx={{}}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -250,7 +250,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -271,7 +271,7 @@ export default function StyledTabs() {
               sx={{ width: "443px", ml: "-20px" }}
             >
               <Grid item xs={6} sx={{}}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -283,7 +283,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -295,7 +295,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6} sx={{}}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -307,7 +307,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -328,7 +328,7 @@ export default function StyledTabs() {
               sx={{ width: "443px", ml: "-20px" }}
             >
               <Grid item xs={6} sx={{}}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -340,7 +340,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -352,7 +352,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6} sx={{}}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}
@@ -364,7 +364,7 @@ export default function StyledTabs() {
                 />
               </Grid>
               <Grid item xs={6}>
-                <SelectedMenu
+                <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
                   discount={20}

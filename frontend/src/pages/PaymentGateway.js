@@ -7,6 +7,7 @@ import StyledButton from "../components/StyledButton";
 import { PADDING } from "../constants/Padding";
 import { THEME } from "../constants/Theme";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -18,11 +19,12 @@ const theme = createTheme({
 
 function PaymentGateway() {
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 2000);
   }, []);
 
   return (
@@ -113,11 +115,12 @@ function PaymentGateway() {
               marginBottom: "16px",
             }}
           >
-            <StyledButton text={"Belanja lagi"} />
+            <StyledButton text={"Belanja lagi"} onClick={() => navigate("/home")}/>
             <StyledButton
               text={"Lihat Transaksi"}
               style={"outlined"}
               marginTop={"16px"}
+              onClick={() => navigate("/home")}
             />
           </Box>
         </>

@@ -1,24 +1,78 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import EditIcon from "../../assets/location/EditIcon";
 import AppBarTop from "../../components/AppBarTop";
 import { PADDING } from "../../constants/Padding";
 import { THEME } from "../../constants/Theme";
 import { useNavigate } from "react-router-dom";
-
+import { AppContext } from "../../App";
+import { addressModel } from "../../components/API/GetAPI";
+import axios from "axios";
 
 function LocationList() {
-  const [mainLoc, setMainLoc] = React.useState({1:true});
-  const navigate = useNavigate()
+  //loc for hook on this page only!
+  const [mainLoc, setMainLoc] = useState({});
+  const navigate = useNavigate();
+  const { APIAddress, setAPIAddress, mainAddress, setMainAddress, findMainAddress, setFindMainAddress } =
+    useContext(AppContext);
+  const [items, setItems] = useState([]);
+  // const [] = useState({});
 
-  const handleBtn = btnId => e => {
+  useEffect(() => {
+    const items = localStorage.getItem("items");
+    if (items) {
+      setItems(items);
+    }
+    getAPI(items);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('loc', JSON.stringify(findMainAddress));
+  },[findMainAddress]);
+
+  const getAPI = async (items) => {
+    const address = await addressModel(items);
+    setAPIAddress(address);
+    for (let i = 0; i < address.length; i++) {
+      if (address[i].addr_mainAddress) {
+        setMainLoc({ [i]: true });
+        setFindMainAddress(i+1);
+        console.log(findMainAddress);
+      }
+    }
+  };
+
+  const handleBtn = (btnId) => async (e) => {
     e.preventDefault();
-    setMainLoc(false)
-    setMainLoc(state => ({
+    btnId++;
+    const findAddr = APIAddress.find((prod) => prod.id === btnId);
+    setMainAddress(findAddr);
+    console.log("www", findAddr);
+    setFindMainAddress(btnId);
+
+    console.log(btnId, "btnID", findMainAddress);
+    setMainLoc(false);
+    setMainLoc((state) => ({
       ...state,
-      [btnId]: !setMainLoc[true]
+      [btnId - 1]: !setMainLoc[true],
     }));
-    console.log(mainLoc)
+    console.log(mainAddress, "mainadd");
+
+    try {
+      for (let i = 0; i < APIAddress.length; i++) {
+        if (APIAddress[i].addr_mainAddress) {
+          await axios.patch(`http://localhost:8080/addresses/${i + 1}`, {
+            addr_mainAddress: false,
+          });
+        }
+
+        await axios.patch(`http://localhost:8080/addresses/${btnId}`, {
+          addr_mainAddress: true,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -31,9 +85,9 @@ function LocationList() {
         alignItems: "center",
       }}
     >
-      <AppBarTop text={"Daftar Alamat"} line extButtonTxt={"+ Tambah Alamat"}/>
+      <AppBarTop text={"Daftar Alamat"} line extButtonTxt={"+ Tambah Alamat"} />
       {/* 1 */}
-      <Box sx={{border: "1px solid #F5F5F5", borderRadius: '8px', width: PADDING, height: '163px', overflow: 'hidden', marginTop: '21px',  display: 'flex'}}>
+      {/* <Box sx={{border: "1px solid #F5F5F5", borderRadius: '8px', width: PADDING, height: '163px', overflow: 'hidden', marginTop: '21px',  display: 'flex'}}>
       {mainLoc[1] ? <Box sx={{height: '100%', width: '12px', background: THEME.GREEN_PRIMARY,}}/> : ""}
         
         <Box sx={{padding: mainLoc[1] ? "15px 17px 15px 17px":'15px 17px 15px 22px', }}>
@@ -58,6 +112,7 @@ function LocationList() {
           </Typography>
         </Box>
       </Box>
+
       <Box sx={{border: "1px solid #F5F5F5", borderRadius: '8px', width: PADDING, height: '163px', overflow: 'hidden', marginTop: '21px',  display: 'flex'}}>
         {mainLoc[2] ? <Box sx={{height: '100%', width: '12px', background: THEME.GREEN_PRIMARY,}}/> : ""}
         
@@ -82,8 +137,126 @@ function LocationList() {
           Jl. Pulo Mas Barat XI No.19, RT.3/RW.10, Kayu Putih, Kec. Pulo Gadung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13210
           </Typography>
         </Box>
-      </Box>
+      </Box> */}
 
+      {Object.keys(APIAddress).map((i) => (
+        <Box key={i}>
+          <Box
+            sx={{
+              border: "1px solid #F5F5F5",
+              borderRadius: "8px",
+              width: PADDING,
+              height: "163px",
+              overflow: "hidden",
+              marginTop: "21px",
+              display: "flex",
+            }}
+          >
+            {mainLoc[i] ? (
+              <Box
+                sx={{
+                  height: "100%",
+                  width: "7px",
+                  background: THEME.GREEN_PRIMARY,
+                }}
+              />
+            ) : (
+              ""
+            )}
+
+            <Box
+              sx={{
+                padding: mainLoc[i]
+                  ? "15px 17px 15px 17px"
+                  : "15px 17px 15px 23px",
+                width: "100%",
+              }}
+            >
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                {mainLoc[i] ? (
+                  <Box
+                    sx={{
+                      background: THEME.GREEN_PRIMARY,
+                      width: "53px",
+                      height: "19px",
+                      borderRadius: "4px",
+                      fontWeight: 600,
+                      color: "white",
+                      fontSize: "10px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      "&:hover": {
+                        cursor: "pointer",
+                      },
+                    }}
+                  >
+                    UTAMA
+                  </Box>
+                ) : (
+                  <Box
+                    sx={{
+                      color: THEME.GREEN_PRIMARY,
+                      width: "155px",
+                      height: "19px",
+                      borderRadius: "4px",
+                      fontWeight: 600,
+                      border: "1px solid" + THEME.GREEN_PRIMARY,
+                      fontSize: "10px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      "&:hover": {
+                        cursor: "pointer",
+                      },
+                    }}
+                    onClick={handleBtn(i)}
+                  >
+                    Jadikan Alamat Utama
+                  </Box>
+                )}
+
+                <Box
+                  onClick={() => navigate("/changelocation")}
+                  sx={{
+                    height: "24px",
+                    "&:hover": {
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  <EditIcon />
+                </Box>
+              </Box>
+              <Typography
+                sx={{ marginTop: "11px", fontWeight: 500, fontSize: "14px" }}
+              >
+                {APIAddress[i].addr_name}
+              </Typography>
+              <Typography
+                sx={{
+                  marginTop: "6px",
+                  fontSize: "12px",
+                  fontWeight: 400,
+                  color: "#333333",
+                }}
+              >
+                {APIAddress[i].addr_handphone_number}
+              </Typography>
+              <Typography
+                sx={{
+                  marginTop: "5px",
+                  fontWeight: 400,
+                  fontSize: "12px",
+                  color: "#333333",
+                }}
+              >
+                {APIAddress[i].addr_fullAddress}
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+      ))}
     </Box>
   );
 }

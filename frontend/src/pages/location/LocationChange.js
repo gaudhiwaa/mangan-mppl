@@ -66,7 +66,6 @@ function Location() {
         <SwipeableEdgeDrawer/>
       </Box>
       </>
-      
       : 
       <>
       <Box

@@ -1,10 +1,38 @@
 import { Box, Button, Typography } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useContext, useState } from "react";
+import { AppContext } from "../App";
 import EditIcon from "../assets/checkout/EditIcon";
 import { THEME } from "../constants/Theme";
+import { checkoutModel } from "./API/GetAPI";
 
-function QuantityButton({}) {
+function QuantityButton({index, item}) {
   const [ItemQty, setItemQty] = React.useState(0);
+  const {APICheckout, setAPICheckout} = useContext(AppContext);
+  // const [foodID, setFoodID] = React.useState()
+
+  const deleteFromCheckout = async (index) => {
+    let foodID = 0
+
+    for(let i=0; i<APICheckout.length; i++){
+      console.log("MASUKK")
+      if(APICheckout[i].f_id == index) {
+        console.log("DAPETT")
+        foodID = APICheckout[i].id}
+      // setFoodID(i)
+    }
+
+    console.log(foodID)
+
+    try {
+        await axios.delete(`http://localhost:8080/checkout/${foodID}`)
+    } catch (error) {
+      console.log(error);
+    }
+    const checkout = await checkoutModel(item);
+    setAPICheckout(checkout);
+    console.log("DELL", index)
+  };
 
   return (
     <Box sx={{ display: "flex", gap: "12px", alignItems: "center" }}>
@@ -21,6 +49,7 @@ function QuantityButton({}) {
             cursor: "pointer",
           },
         }}
+        onClick={()=>deleteFromCheckout(index)}
       >
         <EditIcon />
       </Box>

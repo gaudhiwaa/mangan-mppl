@@ -9,7 +9,13 @@ import { THEME } from "../constants/Theme";
 import { useNavigate } from "react-router-dom";
 import BasketIcon from "../assets/product/BasketIcon";
 
-export default function AppBarTop({ text, line, extButtonTxt, addBasket}) {
+export default function AppBarTop({
+  text,
+  line,
+  extButtonTxt,
+  addBasket,
+  disableBackButton,
+}) {
   const navigate = useNavigate();
   return (
     <Box sx={{ width: "100%" }}>
@@ -21,23 +27,27 @@ export default function AppBarTop({ text, line, extButtonTxt, addBasket}) {
         <Toolbar>
           {extButtonTxt ? (
             <>
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: "5px", ml: -2 }}
-                onClick={() => navigate(-1)}
-              >
-                <ArrowBackIcon
-                  sx={{
-                    fontWeight: "bold",
-                    color: THEME.GREEN_PRIMARY,
-                    width: "24px",
-                    height: "24px",
-                  }}
-                />
-              </IconButton>
+              {disableBackButton ? (
+                ""
+              ) : (
+                <IconButton
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  sx={{ mr: "5px", ml: -2 }}
+                  onClick={() => navigate(-1)}
+                >
+                  <ArrowBackIcon
+                    sx={{
+                      fontWeight: "bold",
+                      color: THEME.GREEN_PRIMARY,
+                      width: "24px",
+                      height: "24px",
+                    }}
+                  />
+                </IconButton>
+              )}
               <Typography
                 component="div"
                 sx={{
@@ -63,27 +73,31 @@ export default function AppBarTop({ text, line, extButtonTxt, addBasket}) {
                 onClick={() => navigate("/changelocation")}
               >
                 {extButtonTxt}
-              </Typography> 
+              </Typography>
             </>
           ) : (
             <>
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: "5px", ml: -2 }}
-                onClick={() => navigate(-1)}
-              >
-                <ArrowBackIcon
-                  sx={{
-                    fontWeight: "bold",
-                    color: THEME.GREEN_PRIMARY,
-                    width: "24px",
-                    height: "24px",
-                  }}
-                />
-              </IconButton>
+              {disableBackButton ? (
+                ""
+              ) : (
+                <IconButton
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  sx={{ mr: "5px", ml: -2 }}
+                  onClick={() => navigate(-1)}
+                >
+                  <ArrowBackIcon
+                    sx={{
+                      fontWeight: "bold",
+                      color: THEME.GREEN_PRIMARY,
+                      width: "24px",
+                      height: "24px",
+                    }}
+                  />
+                </IconButton>
+              )}
               <Typography
                 component="div"
                 sx={{
@@ -92,28 +106,38 @@ export default function AppBarTop({ text, line, extButtonTxt, addBasket}) {
                   fontWeight: 600,
                   color: THEME.BLACK_PRIMARY,
                   mt: "3px",
+                  ml: '-5px'
                 }}
               >
                 {text}
               </Typography>
 
-              {addBasket? <Box sx={{"&:hover": {
-                  cursor: "pointer",
-                },}}><BasketIcon/></Box>:
-              <Typography
-              sx={{
-                fontWeight: "bold",
-                fontSize: "14px",
-                color: THEME.GREEN_PRIMARY,
-                marginTop: "4px",
-                "&:hover": {
-                  cursor: "pointer",
-                },
-              }}
-              onClick={() => navigate("/changelocation")}
-            >
-              {extButtonTxt}
-            </Typography> }
+              {addBasket ? (
+                <Box
+                  sx={{
+                    "&:hover": {
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  <BasketIcon />
+                </Box>
+              ) : (
+                <Typography
+                  sx={{
+                    fontWeight: "bold",
+                    fontSize: "14px",
+                    color: THEME.GREEN_PRIMARY,
+                    marginTop: "4px",
+                    "&:hover": {
+                      cursor: "pointer",
+                    },
+                  }}
+                  onClick={() => navigate("/changelocation")}
+                >
+                  {extButtonTxt}
+                </Typography>
+              )}
             </>
           )}
         </Toolbar>

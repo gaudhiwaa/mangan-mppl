@@ -3,18 +3,41 @@ GET http://localhost:8080/customers
 ###
 GET http://localhost:8080/customers/1
 
+# "name" : "Halo",
+# "email": "gaudhiwaa@gmail.com",
+# "gender": "Male",
+# "password": "mpplceria",
+# "address": "Jl. Teknik Komputer IV, Keputih, Surabaya",
+
+# "c_voucher": ["FREEONGKIR20", "DISKON2022"],
+# "c_address": ["JL.Poncol, Batu Ampar, Kramat Jati"],
 
 ###
 POST http://localhost:8080/customers 
 Content-Type: application/json
 
 {
-    "name" : "Halo",
-    "email": "gaudhiwaa@gmail.com",
-    "gender": "Male",
-    "password": "mpplceria",
-    "address": "Jl. Teknik Komputer IV, Keputih, Surabaya"
+    "c_name": "Labib Alfarabi",
+    "c_email": "labib@gmail.com",
+    "c_handphone_number": "+6281292945485",
+    "c_password": "mpplceria",
+    "transaction_t_id": 2
 }
 
 ###
 DELETE http://localhost:8080/customers/8
+
+###
+GET http://localhost:8080/foods 
+
+
+###
+POST http://localhost:8080/foods 
+Content-Type: application/json
+
+{
+    "f_name": "Rawon",
+    "f_price": 20000,
+    "f_description": "Rawon adalah masakan Indonesia berupa sup daging berkuah hitam dengan campuran bumbu khas yang menggunakan kluwek.",
+    "f_status": "Tersedia"
+}

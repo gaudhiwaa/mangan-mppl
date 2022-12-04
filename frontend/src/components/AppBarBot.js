@@ -10,9 +10,13 @@ import { THEME } from "../constants/Theme";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function AppBarBot() {
+export default function AppBarBot({handleClick}) {
   const [value, setValue] = React.useState(0);
   const navigate = useNavigate();
+
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -21,6 +25,7 @@ export default function AppBarBot() {
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
+          handleClick(newValue)
         }}
         sx={{
           "& .MuiBottomNavigationAction-root, svg": {
@@ -63,14 +68,15 @@ export default function AppBarBot() {
               Transaksi
             </Typography>
           }
-          onClick={() => navigate("/transactions")}
+          // onClick={() => navigate("/transactions")}
           icon={<ReceiptOutlinedIcon sx={{ mt: "4px" }} />}
+          to="/checkout"
         />
         <BottomNavigationAction
           label={
             <Typography sx={{ fontSize: "10px", mt: "4px" }}>Profil</Typography>
           }
-          onClick={() => navigate("/profile")}
+          // onClick={() => navigate("/profile")}
           icon={<AccountCircleOutlinedIcon sx={{ mt: "4px" }} />}
         />
       </BottomNavigation>

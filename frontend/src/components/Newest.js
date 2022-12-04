@@ -17,7 +17,7 @@ function Newest({ title, discount, image, price }) {
       }}
     >
       <Box sx={{ display: "flex" }}>
-        <img src={image} alt="menu" />
+        <img src={image} width="80px" height="70px" alt="menu" />
         <Box sx={{ marginLeft: "10px" }}>
           <Typography sx={{ fontSize: "14px", fontWeight: 500 }}>
             {title}

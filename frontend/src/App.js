@@ -17,6 +17,11 @@ import Product from "./pages/Product";
 import Point from "./pages/Point";
 import Checkout from "./pages/Checkout";
 import Shipment from "./pages/Shipment";
+import Profile from "./pages/Profile";
+import { UserContext } from "./UserContext";
+import React, { createContext, useEffect, useMemo, useState } from "react";
+import axios from "axios";
+import { categoryModel, foodModel } from "./components/API/GetAPI";
 
 const CustomizedSize = styled(Box)({
   backgroundColor: THEME.WHITE,
@@ -30,31 +35,103 @@ const Center = styled(Box)({
   display: "flex",
   justifyContent: "center",
   backgroundColor: THEME.WHITE_SECONDARY,
-  height: '100%',
-  overflow: "hidden"
+  height: "100%",
+  overflow: "hidden",
 });
+
+export function API() {
+  // useState React hook
+  const [APICustomer, setAPICustomer] = useState([]);
+  const [APIFoods, setAPIFoods] = useState([]);
+  const [APICategory, setAPICategory] = useState([]);
+  const [APIAddress, setAPIAddress] = useState([]);
+  const [APICheckout, setAPICheckout] = useState([]);
+  const [mainAddress, setMainAddress] = useState({});
+  const [findMainAddress, setFindMainAddress] = useState({});
+  const [APICek, setAPICek] = useState([]);
+  const [item, setItem] = useState([]);
+  // const providerValue = useMemo(
+  //   () => (
+  //     { APICustomer, setAPICustomer, },
+  //     [APICustomer, setAPICustomer,]
+  //   )
+  // );
+  // const providerValueFoods = useMemo(() => ({foods, setFoods}, [foods, setFoods]))
+
+  const value = {
+    APICustomer,
+    setAPICustomer,
+    APIFoods,
+    setAPIFoods,
+    item,
+    setItem,
+    APICategory,
+    setAPICategory,
+    APIAddress,
+    setAPIAddress,
+    mainAddress,
+    setMainAddress,
+    APICheckout,
+    setAPICheckout,
+    findMainAddress,
+    setFindMainAddress,
+    APICek,
+    setAPICek
+  };
+
+  // useState React hook
+  useEffect(() => {
+    getAPI();
+  }, []);
+
+  const getAPI = async () => {
+    // const customer = await axios.get("http://localhost:8080/customers");
+    // setAPICustomer(customer.data);
+    // const foods = await foodModel()
+    const foods = await foodModel();
+    setAPIFoods(foods);
+    const category = await categoryModel();
+    setAPICategory(category);
+    
+    // console.log(APIFoods.keys(object1));
+
+    // console.log(foods.data[0], APIfoods);
+    // console.log(customer.data[0], APICustomer);
+  };
+
+  return value;
+}
+
+export const AppContext = createContext(null);
+
+export const AppProvider = (props) => (
+  <AppContext.Provider value={API()}>{props.children}</AppContext.Provider>
+);
 
 function App() {
   return (
     <BrowserRouter>
       <Center>
         <CustomizedSize>
-          <Routes>
-            <Route path="/" element={<OnBoarding />} />
-            <Route path="/login" element={<LogIn />} />
-            <Route path="/register-phase-1" element={<RegisterPhase1 />} />
-            <Route path="/register-phase-2" element={<RegisterPhase2 />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/paymentgateway" element={<PaymentGateway />} />
-            <Route path="/changelocation" element={<Location />} />
-            <Route path="/locationlist" element={<LocationList />} />
-            <Route path="/voucher" element={<Voucher />} />
-            <Route path="/product" element={<Product />} />
-            <Route path="/point" element={<Point />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/shipment" element={<Shipment />} />
-          </Routes>
+          <AppProvider>
+            <Routes>
+              <Route path="/" element={<OnBoarding />} />
+              <Route path="/login" element={<LogIn />} />
+              <Route path="/register-phase-1" element={<RegisterPhase1 />} />
+              <Route path="/register-phase-2" element={<RegisterPhase2 />} />
+              <Route path="/home" exact element={<Home />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/paymentgateway" element={<PaymentGateway />} />
+              <Route path="/changelocation" element={<Location />} />
+              <Route path="/locationlist" element={<LocationList />} />
+              <Route path="/voucher" element={<Voucher />} />
+              <Route path="/product/:productId" element={<Product />} />
+              <Route path="/point" element={<Point />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/shipment" element={<Shipment />} />
+              <Route path="/profile" element={<Profile />} />
+            </Routes>
+          </AppProvider>
         </CustomizedSize>
       </Center>
     </BrowserRouter>

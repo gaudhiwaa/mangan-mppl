@@ -15,8 +15,20 @@ import QuantityButton from "../components/QuantityButton";
 import FastDeliveryIcon from "../assets/product/FastDeliveryIcon";
 import CreditCardIcon from "../assets/shipment/CreditCardIcon";
 import CouponIcon from "../assets/shipment/CouponIcon";
+import { useNavigate } from "react-router-dom";
+import SwipeableEdgeDrawer from "../components/SwipeableEdgeDrawer";
+import PaymentDrawer from "../components/PaymentDrawer";
 
 function Shipment() {
+  const navigate = useNavigate();
+  const [openPaymentDrawer, setPaymentDrawer] = React.useState(false);
+
+  const toggleDrawer = () => () => {
+    if (openPaymentDrawer === false) {
+      setPaymentDrawer(true);
+    } else setPaymentDrawer(false);
+  };
+
   return (
     <Box
       sx={{
@@ -25,6 +37,7 @@ function Shipment() {
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
+        overflowY: 'scroll'
       }}
     >
       <AppBarTop text={"Pengiriman"} line />
@@ -67,6 +80,7 @@ function Shipment() {
                 cursor: "pointer",
               },
             }}
+            onClick={() => navigate("/locationlist")}
           >
             Ubah
           </Typography>
@@ -136,7 +150,7 @@ function Shipment() {
               alignItems: "flex-end",
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "flex-start" }}>
+            <Box sx={{ display: "flex", alignItems: "flex-start" }} onClick={() => navigate("/product")}>
               <img src={Beras} width="53px" height={"42px"} />
               <Box sx={{ ml: "10px" }}>
                 <Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
@@ -207,7 +221,8 @@ function Shipment() {
             mt: "11px",
           }}
         />
-
+        
+            
         <Box
           sx={{
             display: "flex",
@@ -240,6 +255,8 @@ function Shipment() {
             sx={{ color: "#4F4F4F", fontSize: "12px", mr: "16px" }}
           />
         </Box>
+
+        
 
         <Box
           sx={{
@@ -403,22 +420,21 @@ function Shipment() {
 
       <Box
         sx={{
-          height: "1px",
-          width: "100%",
-          background: "#FAFAFA",
-          mt: "0px",
-        }}
-      />
-
-      <Box
-        sx={{
           position: "fixed",
           bottom: 0,
           paddingBottom: "16px",
           background: "white",
         }}
       >
-        <Box sx={{ width: PADDING, mt: "11px" }}>
+        <Box
+        sx={{
+          height: "1px",
+          width: "100%",
+          background: "#FAFAFA",
+          mt: "0px",
+        }}
+      />
+        <Box sx={{ width: PADDING, mt: "11px",  }}>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography sx={{ fontWeight: 600, fontSize: "14px" }}>
               Total Bayar
@@ -430,7 +446,7 @@ function Shipment() {
         </Box>
 
         <Box sx={{ width: PADDING, mt: "11px" }}>
-          <StyledButton text={"Bayar"} />
+          <StyledButton text={"Bayar"} onClick={() => navigate("/payment")}/>
         </Box>
       </Box>
     </Box>
