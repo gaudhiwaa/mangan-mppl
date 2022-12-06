@@ -50,6 +50,7 @@ export function API() {
   const [findMainAddress, setFindMainAddress] = useState({});
   const [APICek, setAPICek] = useState([]);
   const [item, setItem] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
   // const providerValue = useMemo(
   //   () => (
   //     { APICustomer, setAPICustomer, },
@@ -76,7 +77,9 @@ export function API() {
     findMainAddress,
     setFindMainAddress,
     APICek,
-    setAPICek
+    setAPICek,
+    totalPrice,
+    setTotalPrice
   };
 
   // useState React hook

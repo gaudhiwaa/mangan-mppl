@@ -78,7 +78,6 @@ function Home() {
     const address = await addressModel(items);
     setAPIAddress(address);
 
-    console.log("leng", address.length);
     try {
       for (let i = 0; i < address.length; i++) {
         if (address[i].addr_mainAddress) {
@@ -322,7 +321,6 @@ function Home() {
                           image={APICategory[i].cat_image}
                         />
                       </Box>
-                      {console.log(APICategory[0].cat_name)}
                     </>
                   ))}
                 </Box>
