@@ -18,9 +18,7 @@ import Point from "./pages/Point";
 import Checkout from "./pages/Checkout";
 import Shipment from "./pages/Shipment";
 import Profile from "./pages/Profile";
-import { UserContext } from "./UserContext";
 import React, { createContext, useEffect, useMemo, useState } from "react";
-import axios from "axios";
 import { categoryModel, foodModel } from "./components/API/GetAPI";
 
 const CustomizedSize = styled(Box)({
@@ -51,13 +49,6 @@ export function API() {
   const [APICek, setAPICek] = useState([]);
   const [item, setItem] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  // const providerValue = useMemo(
-  //   () => (
-  //     { APICustomer, setAPICustomer, },
-  //     [APICustomer, setAPICustomer,]
-  //   )
-  // );
-  // const providerValueFoods = useMemo(() => ({foods, setFoods}, [foods, setFoods]))
 
   const value = {
     APICustomer,
@@ -95,11 +86,6 @@ export function API() {
     setAPIFoods(foods);
     const category = await categoryModel();
     setAPICategory(category);
-    
-    // console.log(APIFoods.keys(object1));
-
-    // console.log(foods.data[0], APIfoods);
-    // console.log(customer.data[0], APICustomer);
   };
 
   return value;
