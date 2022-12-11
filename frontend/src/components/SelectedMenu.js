@@ -18,6 +18,7 @@ function SelectedMenu({
   rating,
   sold,
   marginRight,
+  tabs,
   onClick,
   navigate,
   index,
@@ -41,71 +42,65 @@ function SelectedMenu({
     const checkout = await checkoutModel("1");
     setAPICek(checkout);
     setAPICheckout(checkout);
+
+    // setFoodCheckout(food)
   };
 
   const bringToCheckout = async (e) => {
+    // const getCheckoutItem = APIFoods.filter((food) => food.id === index+1)
+    // console.log(getCheckoutItem)
+    // setAPICheckout(getCheckoutItem)
+    // console.log("MASUK", APICek.length)
     const food = APIFoods.find((food) => food.id === index + 1);
-    // console.log(food);
-    let largestID = 0;
-    if (APICheckout.length != 0)
-      largestID = APICheckout[APICheckout.length - 1].id;
+    console.log(food);
+    // setAPICheckout(APICheckout => [...APICheckout, ItemCheckout(i)])
+    
+    console.log(APICheckout.find((food) => food.id === index + 1) != undefined);
+    if (APICheckout.find((food) => food.id === index + 1) == undefined) {
+      console.log("MASUKK");
+      setAPICheckout((APICheckout) => [...APICheckout, food]);
+      try {
+        await axios.post("http://localhost:8080/checkout", {
+          id: APICheckout.length + 1,
+          f_name: food.f_name,
+          f_price: food.f_price,
+          f_description: food.f_description,
+          f_status: food.f_status,
+          f_image: food.f_image,
+          f_rating: food.f_rating,
+          f_discount: food.f_discount,
+          f_sold: food.f_sold,
+          f_id: food.id,
+          c_id : items
+        });
+      } catch (error) {
+        console.log(error);
+      }
 
-    setAPICheckout((APICheckout) => [...APICheckout, food]);
-
-    let repeatCheckout = false
-    for(let i=0; i<APICheckout.length; i++){
-      console.log("masuk", food.id, APICheckout[i].f_id)
-      if(food.id === APICheckout[i].f_id) repeatCheckout = true
+      APICheckout.length += 1;
     }
 
-    if(!repeatCheckout){
-    try {
-      await axios.post("http://localhost:8080/checkout", {
-        id: largestID + 1,
-        f_name: food.f_name,
-        f_price: food.f_price,
-        f_description: food.f_description,
-        f_status: food.f_status,
-        f_image: food.f_image,
-        f_rating: food.f_rating,
-        f_discount: food.f_discount,
-        f_sold: food.f_sold,
-        f_id: food.id,
-        f_quantity: 1,
-        c_id: items,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    APICheckout.length += 1;
-   }
+    // setAPICheckout()
   };
 
   return (
     <Box>
-      <Box
-        sx={{
-          width: "100px",
-          padding: "22px 11px 22px 11px",
-          border: "1px solid #F5F5F5",
-          borderRadius: "8px",
-          "&:hover": {
-            cursor: "pointer",
-          },
-        }}
-      >
-        <Box onClick={onClick}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <img src={image} width="110px" height="88px" alt="menu" />
-          </Box>
+      {tabs ? (
+        <Box
+          sx={{
+            width: "164px",
+            height: "250px",
+            padding: "22px 11px 22px 11px",
+            border: "1px solid #F5F5F5",
+            borderRadius: "8px",
+            "&:hover": {
+              cursor: "pointer",
+            },
+          }}
+        >
+          <img src={image} width="164px" alt="menu" />
           <Box>
-            <Typography sx={{ fontSize: "12px", fontWeight: 500, mt: "5px" }}>
+            <Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
               {title}
             </Typography>
           </Box>
@@ -135,7 +130,7 @@ function SelectedMenu({
                     textDecoration: "line-through",
                   }}
                 >
-                  {price.toLocaleString()} / porsi
+                  {price} / porsi
                 </Typography>
               </Box>
             </Box>
@@ -143,11 +138,11 @@ function SelectedMenu({
             ""
           )}
           <Box>
-            <Typography sx={{ fontSize: "13px", marginTop: "6px" }}>
-              Rp{" "}
-              <span style={{ fontWeight: "bold", fontSize: "14px" }}>
-                {(price - (price * discount) / 100).toLocaleString()}
+            <Typography sx={{ fontSize: "14px", marginTop: "6px" }}>
+              <span style={{ fontWeight: "bold" }}>
+                {price - (price * discount) / 100}
               </span>{" "}
+              / porsi
             </Typography>
           </Box>
           <Box sx={{ display: "flex", marginTop: "4px" }}>
@@ -163,19 +158,119 @@ function SelectedMenu({
               Terjual {sold}
             </Box>
           </Box>
+
+          <Box sx={{ marginTop: "8px" }}>
+            <StyledButton
+              text={"Tambah"}
+              style="outlined"
+              height="26px"
+              noShadow
+              // onClick={() =>
+              //   setAPICheckout((APICheckout) => [
+              //     ...APICheckout,
+              //     ItemCheckout("Nama", 50000),
+              //   ])
+              // }
+            />
+          </Box>
         </Box>
-        <Box sx={{ marginTop: "8px" }}>
-          <StyledButton
-            text={"Tambah"}
-            style="outlined"
-            height="26px"
-            borderRadius={"4px"}
-            noShadow
-            // onClick={setAPICheckout(APICheckout => [...APICheckout, ItemCheckout(index, foodCheckout)])}
-            onClick={bringToCheckout}
-          />
+      ) : (
+        <Box
+          sx={{
+            width: "100px",
+            padding: "22px 11px 22px 11px",
+            border: "1px solid #F5F5F5",
+            borderRadius: "8px",
+            "&:hover": {
+              cursor: "pointer",
+            },
+          }}
+        >
+          <Box onClick={onClick}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img src={image} width="110px" height="88px" alt="menu" />
+            </Box>
+            <Box>
+              <Typography sx={{ fontSize: "12px", fontWeight: 500, mt: "5px" }}>
+                {title}
+              </Typography>
+            </Box>
+            {discount ? (
+              <Box sx={{ marginTop: "12px", display: "flex" }}>
+                <Box
+                  sx={{
+                    backgroundColor: "red",
+                    width: "30px",
+                    color: "white",
+                    borderRadius: "4px",
+                    fontWeight: "600",
+                    fontSize: "10px",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginRight: "8px",
+                  }}
+                >
+                  {discount}%
+                </Box>
+                <Box>
+                  <Typography
+                    sx={{
+                      fontWeight: 400,
+                      fontSize: "10px",
+                      color: THEME.GREY_SECONDARY,
+                      textDecoration: "line-through",
+                    }}
+                  >
+                    {price} / porsi
+                  </Typography>
+                </Box>
+              </Box>
+            ) : (
+              ""
+            )}
+            <Box>
+              <Typography sx={{ fontSize: "14px", marginTop: "6px" }}>
+                <span style={{ fontWeight: "bold" }}>
+                  {price - (price * discount) / 100}
+                </span>{" "}
+                / porsi
+              </Typography>
+            </Box>
+            <Box sx={{ display: "flex", marginTop: "4px" }}>
+              <Box sx={{ display: "flex" }}>
+                <StarIcon
+                  sx={{ color: "#FFC431", fontSize: "9px", marginTop: "0.5px" }}
+                />
+                <Typography sx={{ fontSize: "8px", color: "#808386" }}>
+                  {rating} |
+                </Typography>
+              </Box>
+              <Box
+                sx={{ fontSize: "8px", marginLeft: "2px", color: "#808386" }}
+              >
+                Terjual {sold}
+              </Box>
+            </Box>
+          </Box>
+          <Box sx={{ marginTop: "8px" }}>
+            <StyledButton
+              text={"Tambah"}
+              style="outlined"
+              height="26px"
+              borderRadius={"4px"}
+              noShadow
+              // onClick={setAPICheckout(APICheckout => [...APICheckout, ItemCheckout(index, foodCheckout)])}
+              onClick={bringToCheckout}
+            />
+          </Box>
         </Box>
-      </Box>
+      )}
     </Box>
   );
 }

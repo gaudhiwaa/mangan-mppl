@@ -5,7 +5,6 @@ import FoodRoute from "./routes/FoodRoute.js";
 import CategoryRoute from "./routes/CategoryRoute.js";
 import AddressRoute from "./routes/AddressRoute.js";
 import CheckoutRoute from "./routes/CheckoutRoute.js";
-import TransactionsRoute from "./routes/TransactionsRoute.js";
 
 const app = express();
 app.use(cors());
@@ -15,6 +14,5 @@ app.use(FoodRoute);
 app.use(CategoryRoute);
 app.use(AddressRoute);
 app.use(CheckoutRoute);
-app.use(TransactionsRoute);
 
 app.listen(8080, ()=> console.log('Server up and running...'));

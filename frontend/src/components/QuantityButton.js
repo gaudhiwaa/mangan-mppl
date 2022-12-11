@@ -6,12 +6,9 @@ import EditIcon from "../assets/checkout/EditIcon";
 import { THEME } from "../constants/Theme";
 import { checkoutModel } from "./API/GetAPI";
 
-function QuantityButton({index, item, qty, initQty, onClick}) {
-  const [ItemQty, setItemQty] = React.useState(initQty);
+function QuantityButton({index, item}) {
+  const [ItemQty, setItemQty] = React.useState(0);
   const {APICheckout, setAPICheckout} = useContext(AppContext);
-  const {totalPrice, 
-    setTotalPrice
-  } = useContext(AppContext);
   // const [foodID, setFoodID] = React.useState()
 
   const deleteFromCheckout = async (index) => {
@@ -22,7 +19,10 @@ function QuantityButton({index, item, qty, initQty, onClick}) {
       if(APICheckout[i].f_id == index) {
         console.log("DAPETT")
         foodID = APICheckout[i].id}
+      // setFoodID(i)
     }
+
+    console.log(foodID)
 
     try {
         await axios.delete(`http://localhost:8080/checkout/${foodID}`)
@@ -31,28 +31,7 @@ function QuantityButton({index, item, qty, initQty, onClick}) {
     }
     const checkout = await checkoutModel(item);
     setAPICheckout(checkout);
-    console.log("DELL", index);
-    getAPI(item)
-  };
-
-  const getAPI = async (item) => {
-    const checkout = await checkoutModel(item);
-    setAPICheckout(checkout);
-    let tot = []
-    for(let i=0; i<checkout.length; i++){
-      tot.push((checkout[i].f_price -
-        (checkout[i].f_price *
-          checkout[i].f_discount) /
-          100) *
-      (checkout[i].f_quantity))
-    }
-    const payTotal = tot.reduce((partialSum, a) => partialSum + a, 0);
-    // if(payTotal!=total ) {
-      // getAPI(item) 
-    setTotalPrice(payTotal)
-    // }
-    // setTotal(payTotal)
-    // console.log(total!=total) 
+    console.log("DELL", index)
   };
 
   return (
@@ -75,11 +54,7 @@ function QuantityButton({index, item, qty, initQty, onClick}) {
         <EditIcon />
       </Box>
       <Box
-        onClick={ItemQty > 1 ? () => {
-          setItemQty(ItemQty - 1) 
-          qty(ItemQty - 1)}: undefined
-          
-        }
+        onClick={ItemQty > 0 ? () => setItemQty(ItemQty - 1) : undefined}
         sx={{
           width: "24px",
           height: "24px",
@@ -99,9 +74,7 @@ function QuantityButton({index, item, qty, initQty, onClick}) {
         {ItemQty}
       </Typography>
       <Box
-        onClick={() => {
-          setItemQty(ItemQty + 1) 
-          qty(ItemQty + 1)}}
+        onClick={() => setItemQty(ItemQty + 1)}
         sx={{
           width: "24px",
           height: "24px",

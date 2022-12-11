@@ -48,7 +48,17 @@ export function API() {
   const [findMainAddress, setFindMainAddress] = useState({});
   const [APICek, setAPICek] = useState([]);
   const [item, setItem] = useState([]);
+<<<<<<< HEAD
   const [totalPrice, setTotalPrice] = useState(0);
+=======
+  // const providerValue = useMemo(
+  //   () => (
+  //     { APICustomer, setAPICustomer, },
+  //     [APICustomer, setAPICustomer,]
+  //   )
+  // );
+  // const providerValueFoods = useMemo(() => ({foods, setFoods}, [foods, setFoods]))
+>>>>>>> parent of d25f668c1 (feat: add shipment page)
 
   const value = {
     APICustomer,
@@ -68,9 +78,7 @@ export function API() {
     findMainAddress,
     setFindMainAddress,
     APICek,
-    setAPICek,
-    totalPrice,
-    setTotalPrice
+    setAPICek
   };
 
   // useState React hook
