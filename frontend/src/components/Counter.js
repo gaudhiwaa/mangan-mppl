@@ -15,8 +15,8 @@ class Counter extends Component {
 
     this.state = {
       s: "00",
-      m: "15",
-      h: "00"
+      m: "00",
+      h: "24"
     };
 
     //start timer
@@ -26,8 +26,8 @@ class Counter extends Component {
 
       this.start = 1; // set startTimer is running
       let ss = 0,
-        mm = 15,
-        hh = 0;
+        mm = 0,
+        hh = 24;
       intrvl = setInterval(() => {
         ss--;
         if (ss === -1) {
@@ -35,6 +35,11 @@ class Counter extends Component {
           mm--;
         }
         if (mm === -1) {
+          ss = 59;
+          mm = 59
+          hh--
+        }
+        if (hh === -1) {
           return
         }
         this.setState({

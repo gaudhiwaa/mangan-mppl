@@ -6,7 +6,7 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Map from "../assets/location/Map";
 import AppBarTop from "../components/AppBarTop";
 import { PADDING } from "../constants/Padding";
@@ -21,6 +21,10 @@ import SwipeableViews from "react-swipeable-views";
 import PropTypes from "prop-types";
 import Beras from "../assets/product/Beras.png";
 import StyledButton from "../components/StyledButton";
+import { useNavigate, useParams } from "react-router-dom";
+import { AppContext } from "../App";
+import { checkoutModel, transactionModel } from "../components/API/GetAPI";
+import axios from "axios";
 
 const themeColor = createTheme({
   palette: {
@@ -68,6 +72,80 @@ function Transactions() {
   const [chooseMap, setChooseMap] = React.useState(false);
   const [value, setValue] = React.useState(0);
   const theme = useTheme();
+  const [alreadyPaid, setAlreadyPaid] = React.useState([]);
+  const [flag, setFlag] = React.useState(0)
+  let data = []
+
+  const navigate = useNavigate()
+  const {APITransactions, setAPITransactions, setAPICheckout, APICheckout} = useContext(AppContext)
+  // const [midtransRes, setMidtransRes] = useState([])
+  const midtransRes = []
+  let productList = []
+  const [VANumber, setVANumber] = useState([])
+
+  useEffect(() => {
+    const items = localStorage.getItem("items");
+    
+    getAPI(items);
+  }, []);
+
+  const getAPI = async (items) => {
+    const transactions = await transactionModel(items)
+    console.log("wwww",   transactions.length)
+    setAPITransactions(transactions)
+    console.log("EZZ", transactions[0].t_product)
+    console.log("EZZ", transactions[0].response_midtrans)
+    const checkout = await checkoutModel(items);
+    setAPICheckout(checkout);
+    // http://localhost:8080/status/WWWwe3wfq1
+    if(flag == 0){
+    for(let i=0; i<transactions.length; i++){
+      const trans = await axios.get(`http://localhost:8080/status/MPPLCERIA${i}`);
+      // alert(`http://localhost:8080/status/MPPLCERIA${i}`)
+      setAlreadyPaid(oldArray => [...oldArray, trans.data.data]);
+    }setFlag(1)
+  }
+
+  if(alreadyPaid){
+  const halo = APITransactions.filter(
+    checkorder => checkorder.order_id === alreadyPaid.order_id 
+  )
+  console.log(halo, "IHHHH")
+}
+
+    
+    // setAlreadyPaid(trans.data.data)
+    // console.log(trans.data)
+    // console.log(transactions)
+
+    if(transactions!=undefined){
+      for(let i=0; i<transactions.length; i++){
+        const midtrans = JSON.parse(transactions[i].response_midtrans);
+        // console.log(midtrans)
+        midtransRes.push(midtrans)
+
+        // setMidtransRes(midtrans)
+      }
+
+      // const product = JSON.parse(transactions[.t_product);
+      // productList.push(product)
+  
+      console.log("AHI", Object.keys(productList).map((prod, i)=>
+      
+      Object.keys(productList[i]).map((wah, index)=> 
+      // Object.keys(productList[index]).map((adu, num)=>
+      productList[index ].f_image
+      // )
+      )
+      ))
+
+      
+    // const midtrans = JSON.parse(transactions.response_midtrans);
+    // console.log("wwwwwwwww", midtrans)
+    // setMidtransRes(midtrans)
+    // setVANumber(midtrans.va_numbers[0].va_number)
+    }
+  }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -76,6 +154,8 @@ function Transactions() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+
+
 
   return (
     <Box
@@ -136,7 +216,7 @@ function Transactions() {
           >
             <CustomTab label="Berlangsung" />
             <CustomTab label="Selesai" />
-            <CustomTab label="Dibatalkan" />
+           
           </Tabs>
           <SwipeableViews
             axis={theme.direction === "rtl" ? "x-reverse" : "x"}
@@ -144,7 +224,13 @@ function Transactions() {
             onChangeIndex={handleChangeIndex}
           >
             <TabPanel value={value} index={0} dir={theme.direction}>
-              <Box sx={{ width: PADDING, ml: "-16px" }}>
+              
+              {APITransactions != undefined? APITransactions.map((trans, i)=>
+              APITransactions[i].t_status=="Menunggu Pembayaran" ||
+              APITransactions[i].t_status=="Pesanan Dalam Pengiriman"
+              ?
+              <>
+              <Box sx={{ width: PADDING, ml: "-16px" }} key={i}>
                 <Box
                   sx={{
                     display: "flex",
@@ -153,7 +239,7 @@ function Transactions() {
                   }}
                 >
                   <Typography
-                    sx={{ fontWeight: 500, fontSize: "12px", ml: "30px" }}
+                    sx={{ fontWeight: 500, fontSize: "12px", ml: "21px" }}
                   >
                     Simangan
                   </Typography>
@@ -170,7 +256,26 @@ function Transactions() {
                         color: "white",
                       }}
                     >
-                      Pesanan dalam Pengiriman
+                      Pesanan dalam proses
+                      {/* {alreadyPaid!=undefined ? 
+                      
+                      alreadyPaid.find(
+                      checkorder => checkorder.order_id === APITransactions.order_id 
+                    )? "yeah"
+                    
+                    
+                    : 'yes': ""}
+                    {console.log("bismillah", APITransactions.find(
+                      checkorder => checkorder.order_id === alreadyPaid.order_id 
+                    ))} */}
+                    {/* {APITransactions.filter(
+                      checkorder => i < alreadyPaid.length? checkorder.order_id === alreadyPaid[i].order_id : ""
+                    )? "Pesanan Dalam Pengiriman": "Menunggu pembayaran"} */}
+
+{/* {console.log("bismillah", APITransactions.filter(
+                      checkorder => i < alreadyPaid.length? checkorder.order_id === alreadyPaid[i].order_id : ""
+                    ))}  */}
+                    
                     </Typography>
                   </Box>
                 </Box>
@@ -182,14 +287,15 @@ function Transactions() {
                     mt: "12px",
                   }}
                 />
-                <Box sx={{ display: "flex", ml: "9px", mt: "5px" }}>
+                <Box sx={{ display: "flex", ml: "9px", mt: "10px" }}>
                   <Box>
-                    <img src={Beras} width="52px" height="42px" />
+                    {/* <img src={APICheckout[0]!=undefined? APICheckout[0].f_image : ""} width="52px" height="42px" /> */}
+                    {console.log(productList[0])}
                   </Box>
                   <Box>
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Box sx={{ display: "flex", alignItems: "center", marginLeft: '13px'}}>
                       <Typography sx={{ fontWeight: 500, fontSize: "12px" }}>
-                        Beras Organik
+                      Order ID : {APITransactions[i].order_id}
                       </Typography>
                       <Typography
                         sx={{
@@ -199,7 +305,7 @@ function Transactions() {
                           color: "#2DBE78",
                         }}
                       >
-                        +1 Produk lainnya
+                        {/* +1 Produk lainnya */}
                       </Typography>
                     </Box>
                     <Typography
@@ -209,7 +315,7 @@ function Transactions() {
                         color: "#808080",
                       }}
                     >
-                      27 Sep 2021 • 05:12 PM
+                      {/* 27 Sep 2021 • 05:12 PM */}
                     </Typography>
                   </Box>
                 </Box>
@@ -221,135 +327,35 @@ function Transactions() {
               </Box>
               <Box sx={{ display: "flex", justifyContent: "space-between",ml: '22px' }}>
                 <Typography sx={{ fontWeight: 700, fontSize: "14px" }}>
-                  Rp. 79.000
+                  {/* Rp. 79.000 */}
+                  Rp {APITransactions[i].t_price.toLocaleString()}
                 </Typography>
-                <StyledButton
-                  text={"Lacak"}
-                  style="outlined"
-                  noShadow
-                  border="1px solid #2DBE78"
-                  width={"54px"}
-                  height="23px"
-                  borderRadius={"4px"}
-                  fontSize="10px"
-                />
               </Box>
-              
-              </Box>
-              
+              </Box> 
               <Box
-                sx={{
-                  height: "8px",
-                  background: "#FAFAFA",
-                  mt: "20px",
-                  mb: "20px",
-                }}
-              />
-              {/* card */}
-              <Box sx={{ width: PADDING, ml: "-16px" }}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: PADDING,
-                  }}
-                >
-                  <Typography
-                    sx={{ fontWeight: 500, fontSize: "12px", ml: "30px" }}
-                  >
-                    Simangan
-                  </Typography>
-                  <Box sx={{ background: "#FF722C", borderRadius: "4px" }}>
-                    <Typography
-                      sx={{
-                        fontWeight: 600,
-                        fontSize: "10px",
-                        width: "167px",
-                        height: "23px",
-                        alignItems: "center",
-                        display: "flex",
-                        justifyContent: "center",
-                        color: "white",
-                      }}
-                    >
-                      Menunggu Pembayaran
-                    </Typography>
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    width: PADDING,
-                    height: "1px",
-                    background: "#F5F5F5",
-                    mt: "12px",
-                  }}
-                />
-                <Box sx={{ display: "flex", ml: "9px", mt: "5px" }}>
-                  <Box>
-                    <img src={Beras} width="52px" height="42px" />
-                  </Box>
-                  <Box>
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
-                      <Typography sx={{ fontWeight: 500, fontSize: "12px" }}>
-                        Beras Organik
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontWeight: 600,
-                          fontSize: "10px",
-                          ml: "7px",
-                          color: "#2DBE78",
-                        }}
-                      >
-                        +1 Produk lainnya
-                      </Typography>
-                    </Box>
-                    <Typography
-                      sx={{
-                        fontWeight: 400,
-                        fontSize: "12px",
-                        color: "#808080",
-                      }}
-                    >
-                      27 Sep 2021 • 05:12 PM
-                    </Typography>
-                  </Box>
-                </Box>
+              sx={{
+                width: "PADDING",
+                height: "8px",
+                background: "#FAFAFA",
+                mt: "20px",
+                mb: "20px",
+              }}
+            />
+            {console.log(midtransRes, "EHH")}
+            </>:""
+              ): ""} 
+
               
-              <Box sx={{ml: "22px" }}>
-                <Typography sx={{ fontWeight: 400, fontSize: "10px",  }}>
-                  Total Harga:
-                </Typography>
-              </Box>
-              <Box sx={{ display: "flex", justifyContent: "space-between",ml: '22px' }}>
-                <Typography sx={{ fontWeight: 700, fontSize: "14px" }}>
-                  Rp. 79.000
-                </Typography>
-                <StyledButton
-                  text={"Lacak"}
-                  style="outlined"
-                  noShadow
-                  border="1px solid #2DBE78"
-                  width={"54px"}
-                  height="23px"
-                  borderRadius={"4px"}
-                  fontSize="10px"
-                />
-              </Box>
-              
-              </Box>
-              <Box
-                sx={{
-                  width: "PADDING",
-                  height: "8px",
-                  background: "#FAFAFA",
-                  mt: "20px",
-                }}
-              />
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
               {/* card */}
-              <Box sx={{ width: PADDING, ml: "-16px" }}>
+             
+              
+              {APITransactions != undefined? APITransactions.map((trans, i)=>
+              APITransactions[i].t_status=="Pesanan selesai"
+              ?
+              <>
+              <Box sx={{ width: PADDING, ml: "-16px" }} key={i}>
                 <Box
                   sx={{
                     display: "flex",
@@ -358,11 +364,11 @@ function Transactions() {
                   }}
                 >
                   <Typography
-                    sx={{ fontWeight: 500, fontSize: "12px", ml: "30px" }}
+                    sx={{ fontWeight: 500, fontSize: "12px", ml: "21px" }}
                   >
                     Simangan
                   </Typography>
-                  <Box sx={{ background: THEME.GREEN_PRIMARY, borderRadius: "4px" }}>
+                  <Box sx={{ background: "#2DBE78", borderRadius: "4px" }}>
                     <Typography
                       sx={{
                         fontWeight: 600,
@@ -375,7 +381,26 @@ function Transactions() {
                         color: "white",
                       }}
                     >
-                      Pesanan Selesai
+                      Pesanan selesai
+                      {/* {alreadyPaid!=undefined ? 
+                      
+                      alreadyPaid.find(
+                      checkorder => checkorder.order_id === APITransactions.order_id 
+                    )? "yeah"
+                    
+                    
+                    : 'yes': ""}
+                    {console.log("bismillah", APITransactions.find(
+                      checkorder => checkorder.order_id === alreadyPaid.order_id 
+                    ))} */}
+                    {/* {APITransactions.filter(
+                      checkorder => i < alreadyPaid.length? checkorder.order_id === alreadyPaid[i].order_id : ""
+                    )? "Pesanan Dalam Pengiriman": "Menunggu pembayaran"} */}
+
+{/* {console.log("bismillah", APITransactions.filter(
+                      checkorder => i < alreadyPaid.length? checkorder.order_id === alreadyPaid[i].order_id : ""
+                    ))}  */}
+                    
                     </Typography>
                   </Box>
                 </Box>
@@ -387,14 +412,15 @@ function Transactions() {
                     mt: "12px",
                   }}
                 />
-                <Box sx={{ display: "flex", ml: "9px", mt: "5px" }}>
+                <Box sx={{ display: "flex", ml: "9px", mt: "10px" }}>
                   <Box>
-                    <img src={Beras} width="52px" height="42px" />
+                    {/* <img src={APICheckout[0]!=undefined? APICheckout[0].f_image : ""} width="52px" height="42px" /> */}
+                    {console.log(productList[0])}
                   </Box>
                   <Box>
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Box sx={{ display: "flex", alignItems: "center", marginLeft: '13px'}}>
                       <Typography sx={{ fontWeight: 500, fontSize: "12px" }}>
-                        Beras Organik
+                      Order ID : {APITransactions[i].order_id}
                       </Typography>
                       <Typography
                         sx={{
@@ -404,7 +430,7 @@ function Transactions() {
                           color: "#2DBE78",
                         }}
                       >
-                        +1 Produk lainnya
+                        {/* +1 Produk lainnya */}
                       </Typography>
                     </Box>
                     <Typography
@@ -414,7 +440,7 @@ function Transactions() {
                         color: "#808080",
                       }}
                     >
-                      27 Sep 2021 • 05:12 PM
+                      {/* 27 Sep 2021 • 05:12 PM */}
                     </Typography>
                   </Box>
                 </Box>
@@ -426,29 +452,24 @@ function Transactions() {
               </Box>
               <Box sx={{ display: "flex", justifyContent: "space-between",ml: '22px' }}>
                 <Typography sx={{ fontWeight: 700, fontSize: "14px" }}>
-                  Rp. 79.000
+                  {/* Rp. 79.000 */}
+                  Rp {APITransactions[i].t_price.toLocaleString()}
                 </Typography>
-                <StyledButton
-                  text={"Lacak"}
-                  style="outlined"
-                  noShadow
-                  border="1px solid #2DBE78"
-                  width={"54px"}
-                  height="23px"
-                  borderRadius={"4px"}
-                  fontSize="10px"
-                />
+                      
               </Box>
-              
-              </Box>
+              </Box> 
               <Box
-                sx={{
-                  width: "PADDING",
-                  height: "8px",
-                  background: "#FAFAFA",
-                  mt: "20px",
-                }}
-              />
+              sx={{
+                width: "PADDING",
+                height: "8px",
+                background: "#FAFAFA",
+                mt: "20px",
+                mb: "20px",
+              }}
+            />
+            {console.log(midtransRes, "EHH")}
+            </>:""
+              ): ""} 
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
               {/* card */}
@@ -531,16 +552,6 @@ function Transactions() {
                 <Typography sx={{ fontWeight: 700, fontSize: "14px" }}>
                   Rp. 79.000
                 </Typography>
-                <StyledButton
-                  text={"Lacak"}
-                  style="outlined"
-                  noShadow
-                  border="1px solid #2DBE78"
-                  width={"54px"}
-                  height="23px"
-                  borderRadius={"4px"}
-                  fontSize="10px"
-                />
               </Box>
               
               </Box>

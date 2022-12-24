@@ -12,9 +12,11 @@ import { useTheme } from "@emotion/react";
 import Recommendation from "./Recommendation";
 import AyamPangsit from "../assets/product/AyamPangsit.png";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../App";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+  
 
   return (
     <div
@@ -57,6 +59,9 @@ const CustomTab = styled(Tab)({
 export default function StyledTabs() {
   const [value, setValue] = React.useState(0);
   const navigate = useNavigate();
+  const {
+    APIFoods
+  } = React.useContext(AppContext);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -93,49 +98,32 @@ export default function StyledTabs() {
           onChangeIndex={handleChangeIndex}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
+          
             <Grid
               container
               rowSpacing={2}
               columnSpacing={{ xs: 0, sm: 0, md: 0 }}
               sx={{ width: "443px", ml: "-20px" }}
             >
+              {typeof APIFoods == "object"
+                  ? Object.keys(APIFoods).map((foods, i) => (
+                      <>
+                       <Grid item xs={6} sx={{}}>
+                <Recommendation
+                  tabs
+                  title={APIFoods[i].f_name}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={APIFoods[i].f_image}
+                  onClick={() => navigate("/product")}
+                />
+              </Grid>
+                      </>
+                    ))
+                  : ""}
               <Grid item xs={6} sx={{}}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6} sx={{}}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6}>
                 <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
@@ -150,49 +138,31 @@ export default function StyledTabs() {
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
-            <Grid
+          <Grid
               container
               rowSpacing={2}
               columnSpacing={{ xs: 0, sm: 0, md: 0 }}
               sx={{ width: "443px", ml: "-20px" }}
             >
+              {typeof APIFoods == "object"
+                  ? Object.keys(APIFoods).map((foods, i) => (
+                      <>
+                       <Grid item xs={6} sx={{}}>
+                <Recommendation
+                  tabs
+                  title={APIFoods[i].f_name}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={APIFoods[i].f_image}
+                  onClick={() => navigate("/product")}
+                />
+              </Grid>
+                      </>
+                    ))
+                  : ""}
               <Grid item xs={6} sx={{}}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6} sx={{}}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6}>
                 <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
@@ -207,49 +177,31 @@ export default function StyledTabs() {
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            <Grid
+          <Grid
               container
               rowSpacing={2}
               columnSpacing={{ xs: 0, sm: 0, md: 0 }}
               sx={{ width: "443px", ml: "-20px" }}
             >
+              {typeof APIFoods == "object"
+                  ? Object.keys(APIFoods).map((foods, i) => (
+                      <>
+                       <Grid item xs={6} sx={{}}>
+                <Recommendation
+                  tabs
+                  title={APIFoods[i].f_name}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={APIFoods[i].f_image}
+                  onClick={() => navigate("/product")}
+                />
+              </Grid>
+                      </>
+                    ))
+                  : ""}
               <Grid item xs={6} sx={{}}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6} sx={{}}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6}>
                 <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
@@ -264,49 +216,31 @@ export default function StyledTabs() {
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={3} dir={theme.direction}>
-            <Grid
+          <Grid
               container
               rowSpacing={2}
               columnSpacing={{ xs: 0, sm: 0, md: 0 }}
               sx={{ width: "443px", ml: "-20px" }}
             >
+              {typeof APIFoods == "object"
+                  ? Object.keys(APIFoods).map((foods, i) => (
+                      <>
+                       <Grid item xs={6} sx={{}}>
+                <Recommendation
+                  tabs
+                  title={APIFoods[i].f_name}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={APIFoods[i].f_image}
+                  onClick={() => navigate("/product")}
+                />
+              </Grid>
+                      </>
+                    ))
+                  : ""}
               <Grid item xs={6} sx={{}}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6} sx={{}}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6}>
                 <Recommendation
                   tabs
                   title={"Ayam Pangsit"}
@@ -321,49 +255,31 @@ export default function StyledTabs() {
             </Grid>
           </TabPanel>
           <TabPanel value={value} index={4} dir={theme.direction}>
-            <Grid
+          <Grid
               container
               rowSpacing={2}
               columnSpacing={{ xs: 0, sm: 0, md: 0 }}
               sx={{ width: "443px", ml: "-20px" }}
             >
+              {typeof APIFoods == "object"
+                  ? Object.keys(APIFoods).map((foods, i) => (
+                      <>
+                       <Grid item xs={6} sx={{}}>
+                <Recommendation
+                  tabs
+                  title={APIFoods[i].f_name}
+                  discount={20}
+                  price={"25000"}
+                  rating="5.0"
+                  sold="809"
+                  image={APIFoods[i].f_image}
+                  onClick={() => navigate("/product")}
+                />
+              </Grid>
+                      </>
+                    ))
+                  : ""}
               <Grid item xs={6} sx={{}}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6} sx={{}}>
-                <Recommendation
-                  tabs
-                  title={"Ayam Pangsit"}
-                  discount={20}
-                  price={"25000"}
-                  rating="5.0"
-                  sold="809"
-                  image={AyamPangsit}
-                  onClick={() => navigate("/product")}
-                />
-              </Grid>
-              <Grid item xs={6}>
                 <Recommendation
                   tabs
                   title={"Ayam Pangsit"}

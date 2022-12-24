@@ -44,3 +44,16 @@ export const deleteFoods = async(req, res) =>{
         console.log(error.message);
     }
 }
+
+export const updateFoods = async(req, res) =>{
+    try {
+        await Food.update(req.body,{
+            where:{
+                id: req.params.id
+            }
+        });
+        res.status(200).json({msg: "Food Updated"});
+    } catch (error) {
+        console.log(error.message);
+    }
+}

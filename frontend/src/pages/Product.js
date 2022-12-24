@@ -20,23 +20,12 @@ import { AppContext } from "../App";
 
 function Product() {
   const {productId} = useParams()
-  const {APIFoods, setAPIFoods} = useContext(AppContext);
+  const {APIFoods, mainAddress} = useContext(AppContext);
   const apk = APIFoods.data
   const [location, setLocation] = React.useState("Arandra Residence");
   const navigate = useNavigate();
   
-  // const [id, setId] = useState()
-  
   const thisProduct = APIFoods.find(prod => prod.id.toString() === productId)
-  
-  useEffect(()=>{
-    
-
-
-    // const thisProduct = APIFoods.data.find(prod => prod.id === 2)
-    // {console.log(thisProduct, productId)}
-    
-  },[APIFoods])
 
   return (
     <Box
@@ -176,48 +165,19 @@ function Product() {
           border: "1px solid #F5F5F5",
           borderRadius: "8px",
           height: "97px",
+          "&:hover": {
+            cursor: "pointer",
+          },
         }}
       >
-        <Box sx={{ margin: "15px 15px 15px 15px" }}>
+        <Box sx={{ margin: "15px 15px 15px 15px", display: "flex", justifyContent: 'space-between', alignItems: "center", }} onClick={() => navigate("/locationlist")}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <FastDeliveryIcon />
-            <Typography sx={{ fontWeight: 600, fontSize: "12px", ml: "9px" }}>
-              Dikirim ke {location}
+            <Typography sx={{ fontWeight: 600, fontSize: "12px", ml: "9px",  }} >
+              Dikirim ke {mainAddress.addr_ward + ", " + mainAddress.addr_districts}
             </Typography>
           </Box>
-          <Box sx={{ border: "0.5px solid #F5F5F5", mt: "15px", mb: "12px" }} />
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "136px",
-              }}
-            >
-              <Typography sx={{ fontWeight: 600, fontSize: "12px" }}>
-                GoSend
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: "12px",
-                  fontWeight: 500,
-                  color: "#219653",
-                  ml: "28px",
-                }}
-              >
-                Rp 20.000
-              </Typography>
-            </Box>
-            <Box>
-              <ArrowRightIcon />
-            </Box>
-          </Box>
+          <ArrowRightIcon/>
         </Box>
       </Box>
       <Box
@@ -259,7 +219,7 @@ function Product() {
             }}
           >
             <Typography sx={{ fontWeight: 600, fontSize: "12px" }}>
-              Sinar Jati
+              Simangan
             </Typography>
             <Box
               sx={{

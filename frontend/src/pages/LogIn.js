@@ -11,8 +11,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { THEME } from "../constants/Theme";
 import axios from "axios";
-import { UserContext } from "../UserContext";
-import {  AppContext } from "../App";
+import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
 
 function LogIn() {
   const [emailInput, setEmailInput] = useState("");
@@ -26,6 +25,8 @@ function LogIn() {
   const [customer_id, setCustomer_id] = useState("");
   const [index, setIndex] = useState()
   const [items, setItems] = useState([]);
+  const [indexArr, setIndexArr] = useState()
+  const [warning, setWarning] = useState("")
   // const value = useContext(AppContext); 
   // const [value] = React.useContext(AppContext); 
 
@@ -45,20 +46,34 @@ function LogIn() {
     if (items) {
       setItems(items);
     }
-  },[]);
+  }, []);
 
-useEffect(() => {
-  localStorage.setItem('items', JSON.stringify(index));
-},[index]);
+  useEffect(() => {
+    localStorage.setItem('items', JSON.stringify(index));
+  }, [index]);
 
- const enter = () => {
-  if (
-    passwordInput === response[index-1].c_password &&
-    emailInput === response[index-1].c_email
-  )  navigate("/home")
- }
+  const enter = () => {
+    if (response.length != 0) {
+      if (
+        passwordInput === response[indexArr - 1].c_password &&
+        emailInput === response[indexArr - 1].c_email
+      ) { navigate("/home") }
+      if (
+        passwordInput === "mpplceria" &&
+        emailInput === "admin@gmail.com"
+      ) { navigate("/admin") }
+      
+    }
 
-
+    if (!emailInput && !passwordInput) {
+      setWarning("Masukkan Email dan Password")
+    } else if (!buttonColor) {
+      setWarning("Masukkan Email dan Password dengan benar")
+    } else if (btnColor) {
+      setWarning("Email atau Password salah")
+      setPasswordInput("")
+    }
+  }
 
   const btnColor = async () => {
     const response = await axios.get("http://localhost:8080/customers");
@@ -77,48 +92,28 @@ useEffect(() => {
       setButtonColor("");
       setFlag(false);
     }
-    
+
   };
-  
+
 
   const auth = async () => {
     // const items = JSON.parse(localStorage.getItem('items'));
-    
-  
+
+
     // console.log(passwordInput, emailInput)
     for (let i = 0; i < response.length; i++) {
       if (
         passwordInput === response[i].c_password &&
         emailInput === response[i].c_email
       ) {
-        // setAPICustomer(APICustomer[0])
-        setIndex(i+1)
-        // setItems(i);
-        console.log("index nih", i)
-        // if(items){
-        // navigate("/home")
-        // }
-        // setIndex(i)
-        // value = 1
-        // setValue(value[0])
-        // setUser({
-        //   c_id: response[i].c_id,
-        //   c_name: response[i].c_name,
-        //   c_email: response[i].c_email,
-        //   c_voucher: response[i].c_voucher,
-        //   c_address: response[i].c_address,
-        //   c_post_code: response[i].c_post_code,
-        //   c_handphone_number: response[i].c_handphone_number,
-        //   c_password: response[i].c_password,
-        //   transaction_t_id: response[i].c_password,
-        // });
-        
-        
-        // console.log("ini cidnya 3 :", items)
+        setIndex(response[i].id)
+        setIndexArr(i + 1)
+        console.log("index nih", response[i].id)
+        console.log("indexarr nih", i)
       }
-   
+
     }
-    
+
     // console.log(user);
   };
 
@@ -144,13 +139,20 @@ useEffect(() => {
               fontSize: "16px",
               fontWeight: 600,
               color: { buttonColor },
-              marginBottom: "24px",
+              marginBottom: warning? "12px" : "24px",
             }}
           >
-            Masuk Melalui Email
+             Masuk Melalui Email
           </Typography>
+          {warning ? 
+          <Box sx={{background: 'red', color: 'white',  borderRadius: '4px', mb: '12px', }}>
+          <Typography sx={{fontSize: '13px', ml: '5px', display: 'flex', alignItems: 'center'}}>
+          <ReportGmailerrorredIcon sx={{fontSize: "16px", mr: '5px', mt: '4px', mb: '4px'}}/>  {warning} 
+          </Typography>
+          </Box> : ""}
           <StyledTextField
             text="Email Address"
+            value={emailInput}
             icon={<MailOutlineIcon />}
             onChange={(event) => {
               setEmailInput(event.target.value);
@@ -161,6 +163,7 @@ useEffect(() => {
               setPasswordInput(event.target.value);
             }}
             text="Password"
+            value={passwordInput}
             icon={<LockOutlinedIcon />}
             marginTop="16px"
             type="password"

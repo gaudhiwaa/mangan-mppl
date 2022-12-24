@@ -15,6 +15,8 @@ export default function AppBarTop({
   extButtonTxt,
   addBasket,
   disableBackButton,
+  nav,
+  navAddProd
 }) {
   const navigate = useNavigate();
   return (
@@ -36,7 +38,7 @@ export default function AppBarTop({
                   color="inherit"
                   aria-label="menu"
                   sx={{ mr: "5px", ml: -2 }}
-                  onClick={() => navigate(-1)}
+                  onClick={() => nav? navigate(nav) : navigate(-1)}
                 >
                   <ArrowBackIcon
                     sx={{
@@ -86,7 +88,7 @@ export default function AppBarTop({
                   color="inherit"
                   aria-label="menu"
                   sx={{ mr: "5px", ml: -2 }}
-                  onClick={() => navigate(-1)}
+                  onClick={() => nav? navigate(nav) : navigate(-1)}
                 >
                   <ArrowBackIcon
                     sx={{
@@ -119,6 +121,7 @@ export default function AppBarTop({
                       cursor: "pointer",
                     },
                   }}
+                  onClick={() => navAddProd? navigate(navAddProd) : navigate("/checkout") }
                 >
                   <BasketIcon />
                 </Box>
@@ -133,7 +136,6 @@ export default function AppBarTop({
                       cursor: "pointer",
                     },
                   }}
-                  onClick={() => navigate("/changelocation")}
                 >
                   {extButtonTxt}
                 </Typography>

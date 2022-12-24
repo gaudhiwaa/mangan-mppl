@@ -13,6 +13,7 @@ const Checkout = db.define('checkout',{
   f_discount: DataTypes.INTEGER,
   f_sold: DataTypes.INTEGER,
   f_id: DataTypes.INTEGER,
+  f_quantity: DataTypes.INTEGER,
   c_id: DataTypes.INTEGER
 },{
     freezeTableName:true

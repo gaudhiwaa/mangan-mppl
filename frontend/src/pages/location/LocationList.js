@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { alertTitleClasses, Box, Typography } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import EditIcon from "../../assets/location/EditIcon";
 import AppBarTop from "../../components/AppBarTop";
@@ -28,23 +28,25 @@ function LocationList() {
 
   useEffect(() => {
     localStorage.setItem('loc', JSON.stringify(findMainAddress));
-  },[findMainAddress]);
+  }, [findMainAddress]);
 
   const getAPI = async (items) => {
     const address = await addressModel(items);
+    console.log(address)
     setAPIAddress(address);
     for (let i = 0; i < address.length; i++) {
       if (address[i].addr_mainAddress) {
         setMainLoc({ [i]: true });
-        setFindMainAddress(i+1);
+        setFindMainAddress(i + 1);
         console.log(findMainAddress);
       }
     }
   };
 
-  const handleBtn = (btnId) => async (e) => {
+  const handleBtn = (btnId, i) => async (e) => {
     e.preventDefault();
-    btnId++;
+    // btnId++;
+
     const findAddr = APIAddress.find((prod) => prod.id === btnId);
     setMainAddress(findAddr);
     console.log("www", findAddr);
@@ -54,14 +56,14 @@ function LocationList() {
     setMainLoc(false);
     setMainLoc((state) => ({
       ...state,
-      [btnId - 1]: !setMainLoc[true],
+      [i]: !setMainLoc[true],
     }));
-    console.log(mainAddress, "mainadd");
+    console.log(mainLoc, "mainadd");
 
     try {
       for (let i = 0; i < APIAddress.length; i++) {
         if (APIAddress[i].addr_mainAddress) {
-          await axios.patch(`http://localhost:8080/addresses/${i + 1}`, {
+          await axios.patch(`http://localhost:8080/addresses/${APIAddress[i].id}`, {
             addr_mainAddress: false,
           });
         }
@@ -75,6 +77,25 @@ function LocationList() {
     }
   };
 
+  const handleRemove = async (btnID) => {
+    console.log(findMainAddress, btnID)
+
+    if(APIAddress.length!=1 && findMainAddress!=btnID){ 
+    try {
+      await axios.delete(`http://localhost:8080/addresses/${btnID}`)
+      getAPI(items)
+    } catch (error) {
+      console.log(error);
+    } 
+
+    
+  }
+  else {
+    alert("Lokasi utama tidak bisa dihapus")
+  }
+  }
+
+
   return (
     <Box
       sx={{
@@ -83,9 +104,10 @@ function LocationList() {
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
+        overflow: "scroll"
       }}
     >
-      <AppBarTop text={"Daftar Alamat"} line extButtonTxt={"+ Tambah Alamat"} />
+      <AppBarTop text={"Daftar Alamat"} line extButtonTxt={"+ Tambah Alamat"} nav={"/home"}/>
       {/* 1 */}
       {/* <Box sx={{border: "1px solid #F5F5F5", borderRadius: '8px', width: PADDING, height: '163px', overflow: 'hidden', marginTop: '21px',  display: 'flex'}}>
       {mainLoc[1] ? <Box sx={{height: '100%', width: '12px', background: THEME.GREEN_PRIMARY,}}/> : ""}
@@ -210,14 +232,14 @@ function LocationList() {
                         cursor: "pointer",
                       },
                     }}
-                    onClick={handleBtn(i)}
+                    onClick={handleBtn(APIAddress[i].id, i)}
                   >
                     Jadikan Alamat Utama
                   </Box>
                 )}
 
                 <Box
-                  onClick={() => navigate("/changelocation")}
+                  onClick={() => handleRemove(APIAddress[i].id)}
                   sx={{
                     height: "24px",
                     "&:hover": {
@@ -251,7 +273,8 @@ function LocationList() {
                   color: "#333333",
                 }}
               >
-                {APIAddress[i].addr_fullAddress}
+                {mainLoc[i] ?
+                  mainAddress.addr_ward + ", " + mainAddress.addr_districts + "," : APIAddress[i].addr_ward + ", " + APIAddress[i].addr_districts + ","} {APIAddress[i].addr_fullAddress}
               </Typography>
             </Box>
           </Box>

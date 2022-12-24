@@ -28,7 +28,6 @@ import {
   customerModel,
   foodModel,
 } from "../components/API/GetAPI";
-import Category from "../components/Category";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 function Home() {
@@ -43,12 +42,9 @@ function Home() {
     setAPIFoods,
     APICategory,
     setAPICategory,
-    APIAddress,
     setAPIAddress,
     mainAddress,
     setMainAddress,
-    findMainAddress,
-    setFindMainAddress,
   } = useContext(AppContext);
   // const { } = useContext(AppContext)
   const [items, setItems] = useState([]);
@@ -64,11 +60,12 @@ function Home() {
     const loc = localStorage.getItem("loc");
     if (items) setItems(items);
     if (loc) setLoc(loc);
-
+    console.log(items)
     getAPI(items);
   }, []);
 
   const getAPI = async (items) => {
+
     const customers = await customerModel(items);
     setAPICustomer(customers);
     const foods = await foodModel();
@@ -77,22 +74,28 @@ function Home() {
     setAPICategory(category);
     const address = await addressModel(items);
     setAPIAddress(address);
+     console.log(address[0], "NIHH", address.length)
 
-    console.log("leng", address.length);
+    if(address.length == 1) {
+        setMainAddress(address[0]);
+    }else {
+
     try {
       for (let i = 0; i < address.length; i++) {
         if (address[i].addr_mainAddress) {
           const cek = await axios.get(
-            `http://localhost:8080/addresses/${i + 1}`
+            `http://localhost:8080/addresses/${address[i].id}`
           );
           if (cek.data.addr_mainAddress === true) {
             setMainAddress(address[i]);
           }
         }
       }
+      
     } catch (error) {
       console.log(error);
     }
+  }
   };
 
   return (
@@ -161,7 +164,7 @@ function Home() {
               </Box>
             </Box>
             <Box>
-              <NotificationsNoneOutlinedIcon
+              {/* <NotificationsNoneOutlinedIcon
                 sx={{
                   color: THEME.GREEN_PRIMARY,
                   fontSize: "22px",
@@ -169,8 +172,8 @@ function Home() {
                     cursor: "pointer",
                   },
                 }}
-              />
-              <CommentOutlinedIcon
+              /> */}
+              {/* <CommentOutlinedIcon
                 sx={{
                   color: THEME.GREEN_PRIMARY,
                   marginLeft: "15px",
@@ -179,12 +182,12 @@ function Home() {
                     cursor: "pointer",
                   },
                 }}
-              />
+              /> */}
             </Box>
           </Box>
           <StyledTextField
             icon={<SearchIcon />}
-            text="Mau belanja apa?"
+            text={"Hai " + APICustomer.c_name + "!  "}
             marginTop="12px"
           ></StyledTextField>
           <Box
@@ -236,7 +239,7 @@ function Home() {
                     fontWeight: 500,
                   }}
                 >
-                  3 Voucher
+                  1 Voucher
                   {/* {APICustomer.c_name} */}
                   {/* {APIFoods.f_name} */}
                 </Typography>
@@ -281,7 +284,7 @@ function Home() {
                     fontWeight: 500,
                   }}
                 >
-                  2.700 Poin
+                  1000 Poin
                 </Typography>
               </Box>
             </Box>
@@ -314,7 +317,7 @@ function Home() {
                   {/* </>
     ): ""} */}
 
-                  {Object.keys(APICategory).map((i) => (
+                  {/* {Object.keys(APICategory).map((i) => (
                     <>
                       <Box sx={{ mr: "42px" }}>
                         <Category
@@ -324,7 +327,7 @@ function Home() {
                       </Box>
                       {console.log(APICategory[0].cat_name)}
                     </>
-                  ))}
+                  ))} */}
                 </Box>
               </Box>
             </Box>
@@ -334,7 +337,7 @@ function Home() {
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                marginTop: "28px",
+                // marginTop: "28px",
               }}
             >
               <Box>
@@ -353,7 +356,8 @@ function Home() {
                     },
                   }}
                 >
-                  {HOME.LihatSemua}
+                  {/* {HOME.LihatSemua} */}
+                  Menu Pilihan
                 </Typography>
               </Box>
             </Box>
@@ -407,6 +411,7 @@ function Home() {
             </Box>
           </Box>
           <SectionTitle
+            all={"Paket Hemat"}
             title={HOME.PaketHemat}
             desc={HOME.WarungTerpercayaDi}
           />
@@ -470,7 +475,7 @@ function Home() {
           </Box> */}
             </Box>
           </Box>
-          <SectionTitle title={HOME.Terbaru} desc={HOME.ProdukPilihanPaling} />
+          <SectionTitle title={HOME.Terbaru} desc={HOME.ProdukPilihanPaling} all={"Terbaru"} />
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             {/* {typeof(APIFoods) == 'object' ? 
       Object.keys(APIFoods).map((index, i) =><>

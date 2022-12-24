@@ -31,32 +31,7 @@ function Voucher() {
             </Typography>
             </Box>
         </Box>
-        <Box
-            sx={{borderRadius: '8px', border: '1px solid #f2f2f2', width: PADDING,  marginTop: '25px', overflow: 'hidden'}}
-        >
-            <img src={Voucher2} alt="voucher" width={"100%"} height={"140px"}/>
-            <Box sx={{marginLeft: '13px', marginTop: '10px', marginRight: '13px'}}>
-            <Typography sx={{fontSize: '14px', fontWeight: 600}}>Potongan Diskon 10.10 Senilai 50%</Typography>
-            <Typography
-             sx={{color: '#808080', fontSize: '10px', fontWeight: 500, marginTop: '4px', marginBottom: '15px'}}
-            >
-            Berlaku sampai 10 Okt 2021
-            </Typography>
-            </Box>
-        </Box>
-        <Box
-            sx={{borderRadius: '8px', border: '1px solid #f2f2f2', width: PADDING,  marginTop: '25px', overflow: 'hidden'}}
-        >
-            <img src={Voucher3} alt="voucher" width={"100%"} height={"140px"}/>
-            <Box sx={{marginLeft: '13px', marginTop: '10px', marginRight: '13px'}}>
-            <Typography sx={{fontSize: '14px', fontWeight: 600}}>Potongan Diskon 10.10 Senilai 50%</Typography>
-            <Typography
-             sx={{color: '#808080', fontSize: '10px', fontWeight: 500, marginTop: '4px', marginBottom: '15px'}}
-            >
-            Berlaku sampai 10 Okt 2021
-            </Typography>
-            </Box>
-        </Box>
+       
     
     
 

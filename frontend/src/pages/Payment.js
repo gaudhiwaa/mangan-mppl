@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppBarTop from "../components/AppBarTop";
 import { THEME } from "../constants/Theme";
 import { PAYMENT } from "../constants/Typography";
@@ -8,11 +8,47 @@ import Counter from "../components/Counter";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import StyledButton from "../components/StyledButton";
 import { PADDING } from "../constants/Padding";
-import { useNavigate } from "react-router-dom";
-import BCAIcon from "../assets/payment/PaymentGatewayPict copy";
+import { useNavigate, useParams } from "react-router-dom";
+import BCAIcon from "../assets/payment/BCAIcon";
+import { AppContext } from "../App";
+import { transactionModel } from "../components/API/GetAPI";
 
 function Payment() {
   const navigate = useNavigate()
+  const { transactionId } = useParams()
+  // const {APITransactions, setAPITransactions} = useState(AppContext)
+  const [thisTransactions, setThisTransactions] = useState([])
+  const [midtransRes, setMidtransRes] = useState([])
+  const [VANumber, setVANumber] = useState([])
+
+  useEffect(() => {
+    const items = localStorage.getItem("items");
+    getAPI(items);
+  }, []);
+
+  const getAPI = async (items) => {
+    const transactions = await transactionModel(items)
+    // setAPITransactions(transactions)
+
+    const thistransaction = transactions.find(trans => (trans.id-1).toString() === transactionId)
+    console.log(thistransaction)
+    setThisTransactions(thistransaction)
+
+    const va_index = 0
+
+    if (thistransaction != undefined) {
+      console.log("1", thistransaction)
+      const midtrans = JSON.parse(thistransaction.response_midtrans);
+      console.log("wwwwwwwww", midtrans)
+      setMidtransRes(midtrans)
+
+      if (thistransaction.t_paymentMethod == "Bank Permata") {
+        setVANumber(midtrans.permata_va_number)
+      } else
+        setVANumber(midtrans.va_numbers[0].va_number)
+    }
+  }
+
   return (
     <Box
       sx={{
@@ -36,9 +72,14 @@ function Payment() {
         <Box sx={{ margin: "20px 15px 10px 15px" }}>
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: 'center' }}>
             <Typography sx={{ fontSize: "12px", fontWeight: 600 }}>
-              {PAYMENT.BCAVirtual}
+              {thisTransactions != undefined ?
+                thisTransactions.t_paymentMethod
+                : ""}
+              {/* {APITransactions[transactionId].t_paymentMethod} */}
+              {console.log("www", thisTransactions)}
             </Typography>
-            <BCAIcon/>
+            {/* <img src={thisTransactions.t_image} width={"51px"}/> */}
+            {/* <BCAIcon /> */}
           </Box>
           <Box
             sx={{
@@ -60,7 +101,9 @@ function Payment() {
             </Typography>
             <Box sx={{ display: "flex" }}>
               <Typography sx={{ fontSize: "12px", fontWeight: 600 }}>
-                8079 3875 2859 2841
+                {VANumber}
+                {/* {thisTransactions!=undefined?
+                console.log(JSON.parse(thisTransactions.response_midtrans)): ""} */}
               </Typography>
               <ContentCopyIcon
                 sx={{ fontSize: "13px", marginTop: "3px", marginLeft: "3px" }}
@@ -90,7 +133,8 @@ function Payment() {
                 color: THEME.GREEN_PRIMARY,
               }}
             >
-              Rp 70.000
+              {thisTransactions.t_price != undefined ?
+                "Rp " + thisTransactions.t_price.toLocaleString() : ""}
             </Typography>
           </Box>
         </Box>
@@ -139,7 +183,8 @@ function Payment() {
           }}
         >
           <Typography sx={{ fontSize: "12px", color: "#828282" }}>
-            06 September 2020, 11:34
+            {midtransRes.expire_time}
+            {/* 06 September 2020, 11:34 */}
           </Typography>
         </Box>
         <Box sx={{ border: "1px dashed #FAFAFA", marginTop: "23px" }}></Box>
@@ -158,7 +203,7 @@ function Payment() {
           <Typography
             sx={{ fontSize: "10px", marginBottom: "8px", color: "#4F4F4F" }}
           >
-            Lakukan pembayaran maximum <b>15 Menit</b> setelah order
+            Lakukan pembayaran maksimum <b>24 Jam</b> setelah order
           </Typography>
         </Box>
         <Box sx={{ display: "flex" }}>
@@ -189,9 +234,9 @@ function Payment() {
           Detail Pesanan
         </Typography>
       </Box>
-      <Box sx={{width: PADDING, bottom: '0', position: 'fixed', marginBottom: '16px'}}>
-        <StyledButton text={"Belanja lagi"} onClick={() => navigate("/home")}/>
-        <StyledButton text={"Cek Status Pesanan"} style={"outlined"} marginTop={"16px"} onClick={() => navigate("/paymentgateway")}/>
+      <Box sx={{ width: PADDING, bottom: '0', position: 'fixed', marginBottom: '16px' }}>
+        <StyledButton text={"Belanja lagi"} onClick={() => navigate("/home")} />
+        <StyledButton text={"Cek Status Pesanan"} style={"outlined"} marginTop={"16px"} onClick={() => navigate("/paymentgateway")} />
       </Box>
     </Box>
   );

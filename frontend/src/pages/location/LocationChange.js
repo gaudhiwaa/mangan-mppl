@@ -8,6 +8,7 @@ import LocationIcon from "../../assets/location/LocationIcon";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PinPoint from "../../assets/location/PinPointIcon";
 import SwipeableEdgeDrawer from "../../components/SwipeableEdgeDrawer";
+import TulungagungMap from "../../assets/location/TulungagungMap.png";
 
 function Location() {
   const [searchLoc, setSearchLoc] = React.useState("");
@@ -21,10 +22,14 @@ function Location() {
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
+        backgroundImage: chooseMap? `url(${TulungagungMap})`: "",
+        backgroundSize: chooseMap? "550px": "",
+        // backgroundPosition: "50% 30%"
       }}
     >
-      <AppBarTop text={"Ubah Lokasi"} />
-      <Box sx={{ width: PADDING, display: "flex", flexDirection: "column",  }}>
+      <AppBarTop text={"Tambah Lokasi"} />
+      <Box sx={{background: 'white', width: '100%', display: 'flex', justifyContent: 'center'}}>
+      <Box sx={{ width: PADDING, display: "flex", flexDirection: "column", mb: chooseMap? '10px': ""}}>
         <Box sx={{ width: "100%" }}>
           <TextField
             variant="standard"
@@ -56,6 +61,7 @@ function Location() {
             }}
           ></TextField>
         </Box>
+      </Box>
       </Box>
       {chooseMap? 
       <>

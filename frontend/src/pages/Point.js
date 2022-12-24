@@ -28,11 +28,11 @@ function Point() {
           <Typography
             sx={{ fontSize: "32px", fontWeight: 600, mt: "-9px", ml: "9px" }}
           >
-            Rp2.700
+            Rp1.000
           </Typography>
         </Box>
         <Typography sx={{ fontSize: "14px", fontWeight: 600 }}>
-          270 Poin
+          1000 Poin
         </Typography>
       </Box>
       <Box

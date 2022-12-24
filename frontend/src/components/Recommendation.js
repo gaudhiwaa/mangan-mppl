@@ -33,7 +33,7 @@ function Recommendation({
             }}
             onClick={onClick}
           >
-            <img src={image} width="164px" alt="menu"/>
+            <img src={image} width="164px" height={"120px"} alt="menu"/>
             <Box>
               <Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
                 {title}

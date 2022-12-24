@@ -30,6 +30,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import AddCardOutlinedIcon from '@mui/icons-material/AddCardOutlined';
 import KeamananAkunIcon from "../assets/profile/KeamananAkunIcon";
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
+import { useNavigate } from "react-router-dom";
 
 const themeColor = createTheme({
   palette: {
@@ -75,6 +76,7 @@ TabPanel.propTypes = {
 function Profile() {
   // const [items, setItems] = useState([]);
   const {APICustomer, setAPICustomer} = useContext(AppContext); 
+  const navigate = useNavigate()
 
   // useEffect(() => {
   //   const items = localStorage.getItem('items');
@@ -110,25 +112,6 @@ function Profile() {
             </Box>
           </Box>
           <Box>
-            <NotificationsNoneOutlinedIcon
-              sx={{
-                color: THEME.GREEN_PRIMARY,
-                fontSize: "22px",
-                "&:hover": {
-                  cursor: "pointer",
-                },
-              }}
-            />
-            <CommentOutlinedIcon
-              sx={{
-                color: THEME.GREEN_PRIMARY,
-                marginLeft: "15px",
-                fontSize: "20px",
-                "&:hover": {
-                  cursor: "pointer",
-                },
-              }}
-            />
           </Box>
         </Box>
       </Box>
@@ -210,7 +193,7 @@ function Profile() {
                   cursor: "pointer",
                 },
               }}
-              // onClick={() => navigate("/voucher/")}
+              onClick={() => navigate("/voucher/")}
             >
               {/* voucher icon*/}
               <Box>
@@ -238,7 +221,7 @@ function Profile() {
                     fontWeight: 500,
                   }}
                 >
-                  3 Voucher
+                  1 Voucher
                   {/* {APICustomer.c_name} */}
                   {/* {APIFoods.f_name} */}
                 </Typography>
@@ -266,6 +249,7 @@ function Profile() {
                 sx={{
                   marginLeft: "8px",
                 }}
+                onClick={()=>navigate("/point")}
               >
                 <Typography
                   sx={{
@@ -283,7 +267,7 @@ function Profile() {
                     fontWeight: 500,
                   }}
                 >
-                  2.700 Poin
+                  1000 Poin
                 </Typography>
               </Box>
             </Box>
@@ -313,7 +297,9 @@ function Profile() {
                 height: "24px",
                 display: "flex",
                 justifyContent: "space-between"
-              }}>
+              }}
+              onClick={()=>navigate("/transactions")}
+              >
                 <Box
                   sx={{
                     width: PADDING,
@@ -588,7 +574,9 @@ function Profile() {
                 height: "24px",
                 display: "flex",
                 justifyContent: "space-between"
-              }}>
+              }}
+              onClick={()=>navigate("/")}
+              >
                 <Box
                   sx={{
                     width: PADDING,
@@ -596,23 +584,21 @@ function Profile() {
                     display: "flex",
                   }}>
                 <Box>
-                  <NotificationsNoneOutlinedIcon
-                    sx={{
-                      fontSize: "24px", color: "#828282"
-                    }}
-                  />
                 </Box>
                 <Box
                   sx={{
-                    marginLeft: "12px"
-                  }}>
+                    marginLeft: "12px",
+                  }}
+                  >
+                    
                     <Typography
                       sx={{
                         mt: "3px",
+                        ml:'-8px',
                         fontSize: "12px",
                         color: "#333333",
                         fontWeight: 500
-                      }}> Notifikasi
+                      }}> Logout
                     </Typography>
                 </Box>
                 </Box>

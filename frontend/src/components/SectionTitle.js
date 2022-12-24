@@ -3,7 +3,7 @@ import React from "react";
 import { THEME } from "../constants/Theme";
 import { HOME } from "../constants/Typography";
 
-function SectionTitle({title, desc}) {
+function SectionTitle({title, desc, all}) {
   return (
     <Box sx={{ width: "100%" }}>
       <Box
@@ -29,7 +29,7 @@ function SectionTitle({title, desc}) {
               },
             }}
           >
-            {HOME.LihatSemua}
+            {all}
           </Typography>
         </Box>
       </Box>

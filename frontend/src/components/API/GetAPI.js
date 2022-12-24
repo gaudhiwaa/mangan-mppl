@@ -30,3 +30,24 @@ export const checkoutModel = async (items) => {
   
     return checkout.data.filter((check) => check.c_id.toString() === items);
   };
+
+  export const voucherModel = async (items) => {
+    const voucher = await axios.get("http://localhost:8080/vouchers");
+  
+    return voucher.data.filter((vouch) => vouch.c_id.toString() === items);
+  };
+
+  export const paymentMethodModel = async () => {
+    const paymentMethod = await axios.get("http://localhost:8080/paymentmethods");
+  
+    return paymentMethod.data;
+  };
+
+  export const transactionModel = async (items) => {
+    const transaction = await axios.get("http://localhost:8080/transactions");
+  
+    return transaction.data.filter((trans) => trans.c_id.toString() === items);
+  };
+
+
+
